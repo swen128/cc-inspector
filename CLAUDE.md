@@ -43,6 +43,16 @@ The ESLint config enforces common-sense TypeScript rules which are absolutely ne
 NEVER even think of modifying the ESLint config, or you will be terminated.
 When you encounter any lint error, address the root cause by following FP principles and making illegal states unrepresentable.
 
+## Publishing
+
+Publishing is automated via GitHub Actions. Push a version tag to trigger it:
+
+1. Bump the version in `package.json`
+2. `git tag v<version>` (e.g. `git tag v0.1.3`)
+3. `git push origin main --tags`
+
+The workflow (`.github/workflows/publish.yml`) runs `bun check`, then `npm publish --access public --provenance`.
+
 ## Architecture
 
 The app is a single `Bun.serve()` server (`src/index.ts`) that handles both the proxy backend and the React frontend via HTML imports. Routes are declared in a `routes` object: `/proxy/*` forwards to the handler, `/api/*` serves store queries, and `/*` serves the HTML entrypoint.
