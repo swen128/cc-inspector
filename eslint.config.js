@@ -126,32 +126,10 @@ export default [
     files: ["src/index.ts"],
     rules: {
       "no-console": "off",
+      "functional/no-throw-statements": "off",
     },
   },
   {
-    files: ["src/App.tsx", "src/frontend.tsx"],
-    rules: {
-      "@typescript-eslint/consistent-type-assertions": "off",
-      "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-member-access": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
-      "@typescript-eslint/strict-boolean-expressions": "off",
-    },
-  },
-  {
-    files: ["src/proxy/*.ts"],
-    rules: {
-      "@typescript-eslint/consistent-type-assertions": "off",
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-member-access": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
-      "@typescript-eslint/no-unsafe-return": "off",
-      "@typescript-eslint/no-unsafe-argument": "off",
-      "@typescript-eslint/strict-boolean-expressions": "off",
-    },
-  },
-  {
-    ignores: ["node_modules/", "dist/", "*.config.js", "build.ts"],
+    ignores: ["node_modules/", "dist/", "*.config.js", "src/frontend.tsx"],
   },
 ];

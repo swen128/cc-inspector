@@ -1,6 +1,12 @@
+import { z } from "zod";
 import { ClaudeRequestSchema, type CapturedLog, type ClaudeRequest } from "./schemas";
 
 export type { CapturedLog };
+
+const LooseRequestSchema = z.object({
+  model: z.string().optional(),
+  metadata: z.object({ user_id: z.string().optional() }).passthrough().optional(),
+});
 
 let counter = 0;
 const logs: CapturedLog[] = [];
@@ -10,17 +16,20 @@ export function createLog(method: string, path: string, requestBody: string | nu
   let model: string | null = null;
   let sessionId: string | null = null;
 
-  if (requestBody) {
+  if (requestBody !== null) {
     try {
-      const json = JSON.parse(requestBody);
+      const json: unknown = JSON.parse(requestBody);
       const result = ClaudeRequestSchema.safeParse(json);
       if (result.success) {
         parsedRequest = result.data;
         model = parsedRequest.model;
         sessionId = parsedRequest.metadata?.user_id ?? null;
       } else {
-        model = json?.model ?? null;
-        sessionId = json?.metadata?.user_id ?? null;
+        const loose = LooseRequestSchema.safeParse(json);
+        if (loose.success) {
+          model = loose.data.model ?? null;
+          sessionId = loose.data.metadata?.user_id ?? null;
+        }
       }
     } catch {
       // request body not valid JSON, skip parsing
@@ -50,8 +59,8 @@ export function createLog(method: string, path: string, requestBody: string | nu
 
 export function getFilteredLogs(sessionId?: string, model?: string): CapturedLog[] {
   return logs.filter((l) => {
-    if (sessionId && l.sessionId !== sessionId) return false;
-    if (model && l.model !== model) return false;
+    if (sessionId !== undefined && l.sessionId !== sessionId) return false;
+    if (model !== undefined && l.model !== model) return false;
     return true;
   });
 }
@@ -59,7 +68,7 @@ export function getFilteredLogs(sessionId?: string, model?: string): CapturedLog
 export function getSessions(): string[] {
   const set = new Set<string>();
   for (const l of logs) {
-    if (l.sessionId) set.add(l.sessionId);
+    if (l.sessionId !== null) set.add(l.sessionId);
   }
   return [...set];
 }
@@ -67,7 +76,7 @@ export function getSessions(): string[] {
 export function getModels(): string[] {
   const set = new Set<string>();
   for (const l of logs) {
-    if (l.model) set.add(l.model);
+    if (l.model !== null) set.add(l.model);
   }
   return [...set];
 }
