@@ -30,28 +30,6 @@ const argv = cli({
 const server = serve({
   port: argv.flags.port,
   routes: {
-    "/api/hello": {
-      GET(_req) {
-        return Response.json({
-          message: "Hello, world!",
-          method: "GET",
-        });
-      },
-      PUT(_req) {
-        return Response.json({
-          message: "Hello, world!",
-          method: "PUT",
-        });
-      },
-    },
-
-    "/api/hello/:name": (req) => {
-      const name = req.params.name;
-      return Response.json({
-        message: `Hello, ${name}!`,
-      });
-    },
-
     "/api/logs": (req) => {
       const url = new URL(req.url);
       const sessionId = url.searchParams.get("sessionId") ?? undefined;
