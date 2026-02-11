@@ -27,6 +27,24 @@ Open http://localhost:25947 to see captured requests in real time.
 - **Streaming** — captures SSE streaming responses without buffering
 - **Filtering** — filter by session ID or model
 
+## Options
+
+```
+--port, -p <number>  Port to listen on (default: 25947, env: PORT)
+```
+
+You can also set the port via the `PORT` environment variable:
+
+```bash
+PORT=3000 bunx cc-inspector
+```
+
+Or pass it as a flag:
+
+```bash
+bunx cc-inspector --port 3000
+```
+
 ## How It Works
 
 The proxy sits between Claude Code and `api.anthropic.com`. Setting `ANTHROPIC_BASE_URL` tells Claude Code to send API requests to the proxy instead of directly to Anthropic. The proxy forwards everything to the real API and logs both the request and response.

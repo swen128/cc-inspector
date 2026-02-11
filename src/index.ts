@@ -1,11 +1,29 @@
 #!/usr/bin/env bun
 import { serve } from "bun";
+import { cli } from "cleye";
 import index from "./index.html";
 import { handleProxy } from "./proxy/handler";
 import { getFilteredLogs, getModels, getSessions } from "./proxy/store";
 
+const DEFAULT_PORT = 25947;
+
+const envPort = process.env["PORT"];
+const portDefault = envPort !== undefined ? Number(envPort) : DEFAULT_PORT;
+
+const argv = cli({
+  name: "cc-inspector",
+  flags: {
+    port: {
+      type: Number,
+      alias: "p",
+      default: portDefault,
+      description: "Port to listen on (env: PORT)",
+    },
+  },
+});
+
 const server = serve({
-  port: 25947,
+  port: argv.flags.port,
   routes: {
     "/api/hello": {
       GET(_req) {
