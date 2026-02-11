@@ -1,7 +1,8 @@
+#!/usr/bin/env bun
 import { serve } from "bun";
 import index from "./index.html";
 import { handleProxy } from "./proxy/handler";
-import { getFilteredLogs, getSessions, getModels } from "./proxy/store";
+import { getFilteredLogs, getModels, getSessions } from "./proxy/store";
 
 const server = serve({
   port: 25947,

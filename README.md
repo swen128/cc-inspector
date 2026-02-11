@@ -1,4 +1,4 @@
-# cc-proxy
+# cc-inspector
 
 A transparent proxy for the Anthropic Claude API that captures every request and response, letting you inspect system prompts, tool definitions, messages, and token usage in a web UI.
 
@@ -7,8 +7,7 @@ Built for understanding what Claude Code sends to the API under the hood.
 ## Quick Start
 
 ```bash
-bun install
-bun run dev
+bunx cc-inspector
 ```
 
 Then launch Claude Code through the proxy:
@@ -33,9 +32,9 @@ Open http://localhost:25947 to see captured requests in real time.
 The proxy sits between Claude Code and `api.anthropic.com`. Setting `ANTHROPIC_BASE_URL` tells Claude Code to send API requests to the proxy instead of directly to Anthropic. The proxy forwards everything to the real API and logs both the request and response.
 
 ```
-Claude Code  →  cc-proxy (:25947/proxy/*)  →  api.anthropic.com
-                    ↓
-              Web UI (:25947)
+Claude Code  →  cc-inspector (:25947/proxy/*)  →  api.anthropic.com
+                      ↓
+                Web UI (:25947)
 ```
 
 Logs are stored in memory only and reset when the server restarts.

@@ -1,8 +1,24 @@
 {
-  "name": "bun-react-template",
+  "name": "cc-inspector",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
+  "description": "Transparent proxy for the Anthropic Claude API that captures and displays requests/responses in a web UI",
+  "license": "MIT",
+  "keywords": [
+    "claude",
+    "anthropic",
+    "proxy",
+    "claude-code",
+    "api-inspector",
+    "debugging"
+  ],
+  "bin": {
+    "cc-inspector": "src/index.ts"
+  },
+  "files": [
+    "src",
+    "styles"
+  ],
   "scripts": {
     "dev": "bun --hot src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
