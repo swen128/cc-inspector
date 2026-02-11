@@ -1,16 +1,16 @@
-import { useState, type JSX } from "react";
-import ReactMarkdown from "react-markdown";
 import {
-  Brain,
-  Terminal,
-  ChevronRight,
-  ChevronDown,
   AlertCircle,
+  Brain,
   CheckCircle2,
+  ChevronDown,
+  ChevronRight,
   ImageIcon,
+  Terminal,
 } from "lucide-react";
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
+import { type JSX, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { Badge } from "@/components/ui/badge";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import type { ContentBlockType, ResponseContentBlockType } from "../../proxy/schemas";
@@ -19,15 +19,35 @@ function assertNever(_value: never): JSX.Element {
   return <></>;
 }
 
-export function TextBlock({ text }: { text: string }): JSX.Element {
-  const isSystemReminder = text.includes("<system-reminder>");
+function SystemReminderBlock({ text }: { text: string }): JSX.Element {
+  const [open, setOpen] = useState(false);
 
-  if (isSystemReminder) {
-    return (
-      <div className="text-muted-foreground text-xs italic py-0.5 truncate select-none opacity-60">
-        [system-reminder]
-      </div>
-    );
+  return (
+    <Collapsible open={open} onOpenChange={setOpen}>
+      <CollapsibleTrigger className="flex items-center gap-1.5 py-0.5 cursor-pointer hover:opacity-80 transition-opacity group">
+        {open ? (
+          <ChevronDown className="size-3 text-muted-foreground" />
+        ) : (
+          <ChevronRight className="size-3 text-muted-foreground" />
+        )}
+        <span className="text-muted-foreground text-xs italic select-none opacity-60">
+          [system-reminder]
+        </span>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="pl-4 pt-1">
+          <div className="prose prose-sm dark:prose-invert max-w-none [&_pre]:bg-muted [&_pre]:text-foreground [&_code]:text-[0.8em] [&_p]:my-1 [&_ul]:my-1 [&_ol]:my-1">
+            <ReactMarkdown>{text}</ReactMarkdown>
+          </div>
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+}
+
+export function TextBlock({ text }: { text: string }): JSX.Element {
+  if (text.includes("<system-reminder>")) {
+    return <SystemReminderBlock text={text} />;
   }
 
   return (
