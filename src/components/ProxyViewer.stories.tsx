@@ -3,6 +3,142 @@ import { useState } from "react";
 import type { CapturedLog } from "../proxy/schemas";
 import { ProxyViewer } from "./ProxyViewer";
 
+const BILLING_HEADER = {
+  type: "text" as const,
+  text: "x-anthropic-billing-header: cc_version=2.1.39.c39; cc_entrypoint=cli; cch=6a540;",
+};
+
+const AGENT_IDENTITY = {
+  type: "text" as const,
+  text: "You are Claude Code, Anthropic's official CLI for Claude.",
+};
+
+const FULL_SYSTEM_PROMPT = {
+  type: "text" as const,
+  text: "# System Prompt for Claude Code\n\n## Core Responsibilities\nYou are Claude Code, a specialized AI assistant designed to help developers write, understand, and debug code. Your primary role is to assist with:\n\n- **Code Analysis**: Examine code structure, identify patterns, and suggest improvements\n- **Implementation**: Write production-ready code following best practices\n- **Debugging**: Help locate and fix bugs in existing code\n- **Architecture**: Design scalable, maintainable system architectures\n- **Testing**: Create comprehensive test suites and validate implementations\n\n## Tools Available\nYou have access to specialized tools for file operations, command execution, and code analysis:\n\n### File Operations\n- **Read**: Access file contents with line numbers and optional offset/limit\n- **Edit**: Perform precise string replacements in files\n- **Glob**: Fast pattern matching for finding files across projects\n\n### Command Execution\n- **Bash**: Execute shell commands with timeout support and persistent working directory\n- **Grep**: Powerful regex-based search across codebases\n\n### Code Understanding\n- **Task**: Delegate complex multi-step work to specialized agents\n\n## Important Notes\n\n### Code Quality Standards\n- Follow strict TypeScript rules: no `any`, no type assertions (except `as const`)\n- Use discriminated unions instead of type predicates\n- Ensure all functions have explicit return types\n- Validate data with Zod schemas before type assertions\n\n### Best Practices\n- Always read files before editing to understand context\n- Run `bun check` to verify changes (format + typecheck + lint + knip)\n- Create atomic commits with clear messages\n- Test implementations thoroughly before considering them complete\n\n### Project-Specific Guidelines\n- Use Bun as the runtime and package manager\n- Follow Biome formatting rules\n- Leverage ESLint's strict TypeScript configuration\n- Keep schemas isomorphic between server and front...",
+};
+
+const SKILLS_REMINDER = {
+  type: "text" as const,
+  text: "<system-reminder>\nThe following skills are available:\n- keybindings-help: Display keyboard shortcuts and navigation tips\n- ultrawork: Maximum precision mode. Enforces 100% certainty, mandatory planning, parallel agent delegation, and verification with evidence.\n</system-reminder>",
+};
+
+const CLAUDE_MD_REMINDER = {
+  type: "text" as const,
+  text: '<system-reminder>\nAs you answer the user\'s questions, you can use the following context:\n# claudeMd\n\n## Notes management\nWhen the user refers to "note" or "nb", use the `nb` CLI. Notes are stored in `~/.nb/<notebook-name>/` as markdown files with git tracking.\n\n### Reading\n```bash\nnb list                              # List all notes\nnb list --tags <tag>                 # Filter by tag\nnb show <id> --no-color              # Display content\nnb search "query"                    # Search content\n```\n\n### Creating\n```bash\nnb add -t "Title" -c "Body content"  # Create note with title\nnb todo add "Title"                  # Create todo\n```\n</system-reminder>',
+};
+
+const TOOL_BASH = {
+  name: "Bash",
+  description:
+    "Executes a given bash command in a persistent shell session with optional timeout. All commands run in the working directory by default. Supports git, npm, docker, and other CLI tools. Captures stdout/stderr output.",
+  input_schema: {
+    type: "object",
+    properties: {
+      command: { type: "string", description: "The command to execute" },
+      timeout: {
+        type: "number",
+        description: "Optional timeout in milliseconds (max 600000)",
+      },
+      description: {
+        type: "string",
+        description: "Clear, concise description of what this command does in 5-10 words",
+      },
+    },
+    required: ["command"],
+  },
+};
+
+const TOOL_READ = {
+  name: "Read",
+  description:
+    "Reads a file from the local filesystem. Supports any file type and returns content with line numbers. Can specify offset and limit for large files. Returns error if file does not exist.",
+  input_schema: {
+    type: "object",
+    properties: {
+      file_path: { type: "string", description: "The absolute path to the file to read" },
+      offset: {
+        type: "number",
+        description: "The line number to start reading from (0-based)",
+      },
+      limit: {
+        type: "number",
+        description: "The number of lines to read (defaults to 2000)",
+      },
+    },
+    required: ["file_path"],
+  },
+};
+
+const TOOL_EDIT = {
+  name: "Edit",
+  description:
+    "Performs exact string replacements in files. Must read file first before editing. Supports replaceAll for renaming variables across files. Fails if oldString not found or found multiple times without sufficient context.",
+  input_schema: {
+    type: "object",
+    properties: {
+      file_path: { type: "string", description: "The absolute path to the file to modify" },
+      old_string: { type: "string", description: "The text to replace" },
+      new_string: {
+        type: "string",
+        description: "The replacement text (must be different from oldString)",
+      },
+    },
+    required: ["file_path", "old_string", "new_string"],
+  },
+};
+
+const TOOL_GLOB = {
+  name: "Glob",
+  description:
+    "Fast file pattern matching tool with safety limits. Supports glob patterns like **/*.js or src/**/*.ts. Returns matching file paths sorted by modification time. Works with any codebase size.",
+  input_schema: {
+    type: "object",
+    properties: {
+      pattern: { type: "string", description: "The glob pattern to match files against" },
+      path: { type: "string", description: "The directory to search in (optional)" },
+    },
+    required: ["pattern"],
+  },
+};
+
+const TOOL_GREP = {
+  name: "Grep",
+  description:
+    "A powerful search tool built on ripgrep for finding content across files. Supports full regex syntax with optional file filtering. Returns file paths with matches sorted by modification time. Respects .gitignore.",
+  input_schema: {
+    type: "object",
+    properties: {
+      pattern: { type: "string", description: "The regex pattern to search for" },
+      path: { type: "string", description: "File or directory to search in" },
+      glob: { type: "string", description: "Glob pattern to filter files (e.g., *.ts)" },
+    },
+    required: ["pattern"],
+  },
+};
+
+const TOOL_TASK = {
+  name: "Task",
+  description:
+    "Launch a new agent to handle complex, multi-step tasks autonomously. Use for work that requires specialized expertise or parallel execution. The agent will handle implementation details and report results.",
+  input_schema: {
+    type: "object",
+    properties: {
+      description: { type: "string", description: "A short description of the task" },
+      prompt: { type: "string", description: "The task for the agent to execute" },
+      subagent_type: {
+        type: "string",
+        description: "The type of specialized agent (e.g., build, oracle, librarian)",
+      },
+    },
+    required: ["description", "prompt", "subagent_type"],
+  },
+};
+
+const ALL_TOOLS = [TOOL_BASH, TOOL_READ, TOOL_EDIT, TOOL_GLOB, TOOL_GREP, TOOL_TASK];
+const FULL_SYSTEM = [BILLING_HEADER, AGENT_IDENTITY, FULL_SYSTEM_PROMPT];
+const MINIMAL_SYSTEM = [BILLING_HEADER, AGENT_IDENTITY];
+
 const sampleLogs: CapturedLog[] = [
   {
     id: 1,
@@ -49,14 +185,8 @@ const sampleLogs: CapturedLog[] = [
         {
           role: "user",
           content: [
-            {
-              type: "text" as const,
-              text: "<system-reminder>\nThe following skills are available:\n- keybindings-help: Display keyboard shortcuts and navigation tips\n- ultrawork: Maximum precision mode. Enforces 100% certainty, mandatory planning, parallel agent delegation, and verification with evidence.\n</system-reminder>",
-            },
-            {
-              type: "text" as const,
-              text: '<system-reminder>\nAs you answer the user\'s questions, you can use the following context:\n# claudeMd\n\n## Notes management\nWhen the user refers to "note" or "nb", use the `nb` CLI. Notes are stored in `~/.nb/<notebook-name>/` as markdown files with git tracking.\n\n### Reading\n```bash\nnb list                              # List all notes\nnb list --tags <tag>                 # Filter by tag\nnb show <id> --no-color              # Display content\nnb search "query"                    # Search content\n```\n\n### Creating\n```bash\nnb add -t "Title" -c "Body content"  # Create note with title\nnb todo add "Title"                  # Create todo\n```\n</system-reminder>',
-            },
+            SKILLS_REMINDER,
+            CLAUDE_MD_REMINDER,
             {
               type: "text" as const,
               text: "Help me understand the cc-proxy project structure and then implement a feature to export captured logs as JSON.",
@@ -65,123 +195,8 @@ const sampleLogs: CapturedLog[] = [
           ],
         },
       ],
-      system: [
-        {
-          type: "text" as const,
-          text: "x-anthropic-billing-header: cc_version=2.1.39.c39; cc_entrypoint=cli; cch=6a540;",
-        },
-        {
-          type: "text" as const,
-          text: "You are Claude Code, Anthropic's official CLI for Claude.",
-        },
-        {
-          type: "text" as const,
-          text: "# System Prompt for Claude Code\n\n## Core Responsibilities\nYou are Claude Code, a specialized AI assistant designed to help developers write, understand, and debug code. Your primary role is to assist with:\n\n- **Code Analysis**: Examine code structure, identify patterns, and suggest improvements\n- **Implementation**: Write production-ready code following best practices\n- **Debugging**: Help locate and fix bugs in existing code\n- **Architecture**: Design scalable, maintainable system architectures\n- **Testing**: Create comprehensive test suites and validate implementations\n\n## Tools Available\nYou have access to specialized tools for file operations, command execution, and code analysis:\n\n### File Operations\n- **Read**: Access file contents with line numbers and optional offset/limit\n- **Edit**: Perform precise string replacements in files\n- **Glob**: Fast pattern matching for finding files across projects\n\n### Command Execution\n- **Bash**: Execute shell commands with timeout support and persistent working directory\n- **Grep**: Powerful regex-based search across codebases\n\n### Code Understanding\n- **Task**: Delegate complex multi-step work to specialized agents\n\n## Important Notes\n\n### Code Quality Standards\n- Follow strict TypeScript rules: no `any`, no type assertions (except `as const`)\n- Use discriminated unions instead of type predicates\n- Ensure all functions have explicit return types\n- Validate data with Zod schemas before type assertions\n\n### Best Practices\n- Always read files before editing to understand context\n- Run `bun check` to verify changes (format + typecheck + lint + knip)\n- Create atomic commits with clear messages\n- Test implementations thoroughly before considering them complete\n\n### Project-Specific Guidelines\n- Use Bun as the runtime and package manager\n- Follow Biome formatting rules\n- Leverage ESLint's strict TypeScript configuration\n- Keep schemas isomorphic between server and front...",
-        },
-      ],
-      tools: [
-        {
-          name: "Bash",
-          description:
-            "Executes a given bash command in a persistent shell session with optional timeout. All commands run in the working directory by default. Supports git, npm, docker, and other CLI tools. Captures stdout/stderr output.",
-          input_schema: {
-            type: "object",
-            properties: {
-              command: { type: "string", description: "The command to execute" },
-              timeout: {
-                type: "number",
-                description: "Optional timeout in milliseconds (max 600000)",
-              },
-              description: {
-                type: "string",
-                description: "Clear, concise description of what this command does in 5-10 words",
-              },
-            },
-            required: ["command"],
-          },
-        },
-        {
-          name: "Read",
-          description:
-            "Reads a file from the local filesystem. Supports any file type and returns content with line numbers. Can specify offset and limit for large files. Returns error if file does not exist.",
-          input_schema: {
-            type: "object",
-            properties: {
-              file_path: { type: "string", description: "The absolute path to the file to read" },
-              offset: {
-                type: "number",
-                description: "The line number to start reading from (0-based)",
-              },
-              limit: {
-                type: "number",
-                description: "The number of lines to read (defaults to 2000)",
-              },
-            },
-            required: ["file_path"],
-          },
-        },
-        {
-          name: "Edit",
-          description:
-            "Performs exact string replacements in files. Must read file first before editing. Supports replaceAll for renaming variables across files. Fails if oldString not found or found multiple times without sufficient context.",
-          input_schema: {
-            type: "object",
-            properties: {
-              file_path: { type: "string", description: "The absolute path to the file to modify" },
-              old_string: { type: "string", description: "The text to replace" },
-              new_string: {
-                type: "string",
-                description: "The replacement text (must be different from oldString)",
-              },
-            },
-            required: ["file_path", "old_string", "new_string"],
-          },
-        },
-        {
-          name: "Glob",
-          description:
-            "Fast file pattern matching tool with safety limits. Supports glob patterns like **/*.js or src/**/*.ts. Returns matching file paths sorted by modification time. Works with any codebase size.",
-          input_schema: {
-            type: "object",
-            properties: {
-              pattern: { type: "string", description: "The glob pattern to match files against" },
-              path: { type: "string", description: "The directory to search in (optional)" },
-            },
-            required: ["pattern"],
-          },
-        },
-        {
-          name: "Grep",
-          description:
-            "A powerful search tool built on ripgrep for finding content across files. Supports full regex syntax with optional file filtering. Returns file paths with matches sorted by modification time. Respects .gitignore.",
-          input_schema: {
-            type: "object",
-            properties: {
-              pattern: { type: "string", description: "The regex pattern to search for" },
-              path: { type: "string", description: "File or directory to search in" },
-              glob: { type: "string", description: "Glob pattern to filter files (e.g., *.ts)" },
-            },
-            required: ["pattern"],
-          },
-        },
-        {
-          name: "Task",
-          description:
-            "Launch a new agent to handle complex, multi-step tasks autonomously. Use for work that requires specialized expertise or parallel execution. The agent will handle implementation details and report results.",
-          input_schema: {
-            type: "object",
-            properties: {
-              description: { type: "string", description: "A short description of the task" },
-              prompt: { type: "string", description: "The task for the agent to execute" },
-              subagent_type: {
-                type: "string",
-                description: "The type of specialized agent (e.g., build, oracle, librarian)",
-              },
-            },
-            required: ["description", "prompt", "subagent_type"],
-          },
-        },
-      ],
+      system: FULL_SYSTEM,
+      tools: ALL_TOOLS,
     }),
     responseStatus: 200,
     responseText:
@@ -207,14 +222,8 @@ const sampleLogs: CapturedLog[] = [
         {
           role: "user",
           content: [
-            {
-              type: "text" as const,
-              text: "<system-reminder>\nThe following skills are available:\n- keybindings-help: Display keyboard shortcuts and navigation tips\n- ultrawork: Maximum precision mode. Enforces 100% certainty, mandatory planning, parallel agent delegation, and verification with evidence.\n</system-reminder>",
-            },
-            {
-              type: "text" as const,
-              text: '<system-reminder>\nAs you answer the user\'s questions, you can use the following context:\n# claudeMd\n\n## Notes management\nWhen the user refers to "note" or "nb", use the `nb` CLI. Notes are stored in `~/.nb/<notebook-name>/` as markdown files with git tracking.\n\n### Reading\n```bash\nnb list                              # List all notes\nnb list --tags <tag>                 # Filter by tag\nnb show <id> --no-color              # Display content\nnb search "query"                    # Search content\n```\n\n### Creating\n```bash\nnb add -t "Title" -c "Body content"  # Create note with title\nnb todo add "Title"                  # Create todo\n```\n</system-reminder>',
-            },
+            SKILLS_REMINDER,
+            CLAUDE_MD_REMINDER,
             {
               type: "text" as const,
               text: "Help me understand the cc-proxy project structure and then implement a feature to export captured logs as JSON.",
@@ -259,123 +268,8 @@ const sampleLogs: CapturedLog[] = [
           ],
         },
       ],
-      system: [
-        {
-          type: "text" as const,
-          text: "x-anthropic-billing-header: cc_version=2.1.39.c39; cc_entrypoint=cli; cch=6a540;",
-        },
-        {
-          type: "text" as const,
-          text: "You are Claude Code, Anthropic's official CLI for Claude.",
-        },
-        {
-          type: "text" as const,
-          text: "# System Prompt for Claude Code\n\n## Core Responsibilities\nYou are Claude Code, a specialized AI assistant designed to help developers write, understand, and debug code. Your primary role is to assist with:\n\n- **Code Analysis**: Examine code structure, identify patterns, and suggest improvements\n- **Implementation**: Write production-ready code following best practices\n- **Debugging**: Help locate and fix bugs in existing code\n- **Architecture**: Design scalable, maintainable system architectures\n- **Testing**: Create comprehensive test suites and validate implementations\n\n## Tools Available\nYou have access to specialized tools for file operations, command execution, and code analysis:\n\n### File Operations\n- **Read**: Access file contents with line numbers and optional offset/limit\n- **Edit**: Perform precise string replacements in files\n- **Glob**: Fast pattern matching for finding files across projects\n\n### Command Execution\n- **Bash**: Execute shell commands with timeout support and persistent working directory\n- **Grep**: Powerful regex-based search across codebases\n\n### Code Understanding\n- **Task**: Delegate complex multi-step work to specialized agents\n\n## Important Notes\n\n### Code Quality Standards\n- Follow strict TypeScript rules: no `any`, no type assertions (except `as const`)\n- Use discriminated unions instead of type predicates\n- Ensure all functions have explicit return types\n- Validate data with Zod schemas before type assertions\n\n### Best Practices\n- Always read files before editing to understand context\n- Run `bun check` to verify changes (format + typecheck + lint + knip)\n- Create atomic commits with clear messages\n- Test implementations thoroughly before considering them complete\n\n### Project-Specific Guidelines\n- Use Bun as the runtime and package manager\n- Follow Biome formatting rules\n- Leverage ESLint's strict TypeScript configuration\n- Keep schemas isomorphic between server and front...",
-        },
-      ],
-      tools: [
-        {
-          name: "Bash",
-          description:
-            "Executes a given bash command in a persistent shell session with optional timeout. All commands run in the working directory by default. Supports git, npm, docker, and other CLI tools. Captures stdout/stderr output.",
-          input_schema: {
-            type: "object",
-            properties: {
-              command: { type: "string", description: "The command to execute" },
-              timeout: {
-                type: "number",
-                description: "Optional timeout in milliseconds (max 600000)",
-              },
-              description: {
-                type: "string",
-                description: "Clear, concise description of what this command does in 5-10 words",
-              },
-            },
-            required: ["command"],
-          },
-        },
-        {
-          name: "Read",
-          description:
-            "Reads a file from the local filesystem. Supports any file type and returns content with line numbers. Can specify offset and limit for large files. Returns error if file does not exist.",
-          input_schema: {
-            type: "object",
-            properties: {
-              file_path: { type: "string", description: "The absolute path to the file to read" },
-              offset: {
-                type: "number",
-                description: "The line number to start reading from (0-based)",
-              },
-              limit: {
-                type: "number",
-                description: "The number of lines to read (defaults to 2000)",
-              },
-            },
-            required: ["file_path"],
-          },
-        },
-        {
-          name: "Edit",
-          description:
-            "Performs exact string replacements in files. Must read file first before editing. Supports replaceAll for renaming variables across files. Fails if oldString not found or found multiple times without sufficient context.",
-          input_schema: {
-            type: "object",
-            properties: {
-              file_path: { type: "string", description: "The absolute path to the file to modify" },
-              old_string: { type: "string", description: "The text to replace" },
-              new_string: {
-                type: "string",
-                description: "The replacement text (must be different from oldString)",
-              },
-            },
-            required: ["file_path", "old_string", "new_string"],
-          },
-        },
-        {
-          name: "Glob",
-          description:
-            "Fast file pattern matching tool with safety limits. Supports glob patterns like **/*.js or src/**/*.ts. Returns matching file paths sorted by modification time. Works with any codebase size.",
-          input_schema: {
-            type: "object",
-            properties: {
-              pattern: { type: "string", description: "The glob pattern to match files against" },
-              path: { type: "string", description: "The directory to search in (optional)" },
-            },
-            required: ["pattern"],
-          },
-        },
-        {
-          name: "Grep",
-          description:
-            "A powerful search tool built on ripgrep for finding content across files. Supports full regex syntax with optional file filtering. Returns file paths with matches sorted by modification time. Respects .gitignore.",
-          input_schema: {
-            type: "object",
-            properties: {
-              pattern: { type: "string", description: "The regex pattern to search for" },
-              path: { type: "string", description: "File or directory to search in" },
-              glob: { type: "string", description: "Glob pattern to filter files (e.g., *.ts)" },
-            },
-            required: ["pattern"],
-          },
-        },
-        {
-          name: "Task",
-          description:
-            "Launch a new agent to handle complex, multi-step tasks autonomously. Use for work that requires specialized expertise or parallel execution. The agent will handle implementation details and report results.",
-          input_schema: {
-            type: "object",
-            properties: {
-              description: { type: "string", description: "A short description of the task" },
-              prompt: { type: "string", description: "The task for the agent to execute" },
-              subagent_type: {
-                type: "string",
-                description: "The type of specialized agent (e.g., build, oracle, librarian)",
-              },
-            },
-            required: ["description", "prompt", "subagent_type"],
-          },
-        },
-      ],
+      system: FULL_SYSTEM,
+      tools: ALL_TOOLS,
     }),
     responseStatus: 200,
     responseText:
@@ -462,71 +356,8 @@ const sampleLogs: CapturedLog[] = [
           ],
         },
       ],
-      system: [
-        {
-          type: "text" as const,
-          text: "x-anthropic-billing-header: cc_version=2.1.39.c39; cc_entrypoint=cli; cch=6a540;",
-        },
-        {
-          type: "text" as const,
-          text: "You are Claude Code, Anthropic's official CLI for Claude.",
-        },
-      ],
-      tools: [
-        {
-          name: "Bash",
-          description:
-            "Executes a given bash command in a persistent shell session with optional timeout. All commands run in the working directory by default. Supports git, npm, docker, and other CLI tools. Captures stdout/stderr output.",
-          input_schema: {
-            type: "object",
-            properties: {
-              command: { type: "string", description: "The command to execute" },
-              timeout: {
-                type: "number",
-                description: "Optional timeout in milliseconds (max 600000)",
-              },
-              description: {
-                type: "string",
-                description: "Clear, concise description of what this command does in 5-10 words",
-              },
-            },
-            required: ["command"],
-          },
-        },
-        {
-          name: "Read",
-          description:
-            "Reads a file from the local filesystem. Supports any file type and returns content with line numbers. Can specify offset and limit for large files. Returns error if file does not exist.",
-          input_schema: {
-            type: "object",
-            properties: {
-              file_path: { type: "string", description: "The absolute path to the file to read" },
-              offset: {
-                type: "number",
-                description: "The line number to start reading from (0-based)",
-              },
-              limit: {
-                type: "number",
-                description: "The number of lines to read (defaults to 2000)",
-              },
-            },
-            required: ["file_path"],
-          },
-        },
-        {
-          name: "Glob",
-          description:
-            "Fast file pattern matching tool with safety limits. Supports glob patterns like **/*.js or src/**/*.ts. Returns matching file paths sorted by modification time. Works with any codebase size.",
-          input_schema: {
-            type: "object",
-            properties: {
-              pattern: { type: "string", description: "The glob pattern to match files against" },
-              path: { type: "string", description: "The directory to search in (optional)" },
-            },
-            required: ["pattern"],
-          },
-        },
-      ],
+      system: MINIMAL_SYSTEM,
+      tools: [TOOL_BASH, TOOL_READ, TOOL_GLOB],
     }),
     responseStatus: 200,
     responseText:
@@ -548,12 +379,7 @@ const sampleLogs: CapturedLog[] = [
       max_tokens: 16384,
       stream: true,
       messages: [{ role: "user", content: "Implement a new feature for the proxy." }],
-      system: [
-        {
-          type: "text" as const,
-          text: "You are Claude Code, Anthropic's official CLI for Claude.",
-        },
-      ],
+      system: [AGENT_IDENTITY],
     }),
     responseStatus: 429,
     responseText: null,
@@ -588,16 +414,7 @@ const sampleLogs: CapturedLog[] = [
           ],
         },
       ],
-      system: [
-        {
-          type: "text" as const,
-          text: "x-anthropic-billing-header: cc_version=2.1.39.c39; cc_entrypoint=cli; cch=6a540;",
-        },
-        {
-          type: "text" as const,
-          text: "You are Claude Code, Anthropic's official CLI for Claude.",
-        },
-      ],
+      system: MINIMAL_SYSTEM,
     }),
     responseStatus: 200,
     responseText:
@@ -647,34 +464,8 @@ const nonStreamingLog: CapturedLog = {
     messages: [
       { role: "user", content: "Read the package.json file and tell me the project name." },
     ],
-    system: [
-      {
-        type: "text" as const,
-        text: "You are Claude Code, Anthropic's official CLI for Claude.",
-      },
-    ],
-    tools: [
-      {
-        name: "Read",
-        description:
-          "Reads a file from the local filesystem. Supports any file type and returns content with line numbers. Can specify offset and limit for large files. Returns error if file does not exist.",
-        input_schema: {
-          type: "object",
-          properties: {
-            file_path: { type: "string", description: "The absolute path to the file to read" },
-            offset: {
-              type: "number",
-              description: "The line number to start reading from (0-based)",
-            },
-            limit: {
-              type: "number",
-              description: "The number of lines to read (defaults to 2000)",
-            },
-          },
-          required: ["file_path"],
-        },
-      },
-    ],
+    system: [AGENT_IDENTITY],
+    tools: [TOOL_READ],
   }),
   responseStatus: 200,
   responseText: JSON.stringify({
