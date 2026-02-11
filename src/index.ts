@@ -19,6 +19,11 @@ const argv = cli({
       default: portDefault,
       description: "Port to listen on (env: PORT)",
     },
+    open: {
+      type: Boolean,
+      default: true,
+      description: "Open the browser on start (use --no-open to disable)",
+    },
   },
 });
 
@@ -69,6 +74,27 @@ const server = serve({
   },
 });
 
+const openBrowser = (url: string): void => {
+  const commandByPlatform: Record<string, string[]> = {
+    darwin: ["open", url],
+    linux: ["xdg-open", url],
+    win32: ["cmd", "/c", "start", url],
+  };
+  const command = commandByPlatform[process.platform];
+  if (command === undefined) {
+    return;
+  }
+  const [bin, ...args] = command;
+  if (bin === undefined) {
+    return;
+  }
+  Bun.spawn([bin, ...args], { stdio: ["ignore", "ignore", "ignore"] });
+};
+
 console.log(`🚀 Server running at ${server.url}`);
 console.log(`   Proxy: ${server.url}proxy`);
 console.log(`   Configure: ANTHROPIC_BASE_URL=${server.url}proxy claude`);
+
+if (argv.flags.open) {
+  openBrowser(server.url.href);
+}
