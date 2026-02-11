@@ -1,20 +1,12 @@
-import { useState, useEffect, useCallback, type JSX } from "react";
+import { useState, type JSX } from "react";
 import ReactMarkdown from "react-markdown";
-import { z } from "zod";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./components/ui/select";
-import {
-  CapturedLogSchema,
   type CapturedLog,
   type ClaudeRequest,
   type ContentBlockType,
   type MessageType,
-} from "./proxy/schemas";
+} from "../proxy/schemas";
 
 function prettifyJson(text: string): string {
   try {
@@ -366,37 +358,25 @@ function LogEntry({ log }: { log: CapturedLog }): JSX.Element {
 
 // ── Main viewer ──────────────────────────────────────────────────────────────
 
-export function ProxyViewer(): JSX.Element {
-  const [logs, setLogs] = useState<CapturedLog[]>([]);
-  const [sessions, setSessions] = useState<string[]>([]);
-  const [models, setModels] = useState<string[]>([]);
-  const [selectedSession, setSelectedSession] = useState("__all__");
-  const [selectedModel, setSelectedModel] = useState("__all__");
+export type ProxyViewerProps = {
+  logs: CapturedLog[];
+  sessions: string[];
+  models: string[];
+  selectedSession: string;
+  selectedModel: string;
+  onSessionChange: (session: string) => void;
+  onModelChange: (model: string) => void;
+};
 
-  const fetchData = useCallback(async () => {
-    const params = new URLSearchParams();
-    if (selectedSession !== "__all__") params.set("sessionId", selectedSession);
-    if (selectedModel !== "__all__") params.set("model", selectedModel);
-
-    const [logsRes, sessionsRes, modelsRes] = await Promise.all([
-      fetch(`/api/logs?${params}`),
-      fetch("/api/sessions"),
-      fetch("/api/models"),
-    ]);
-
-    setLogs(z.array(CapturedLogSchema).parse(await logsRes.json()));
-    setSessions(z.array(z.string()).parse(await sessionsRes.json()));
-    setModels(z.array(z.string()).parse(await modelsRes.json()));
-  }, [selectedSession, selectedModel]);
-
-  useEffect(() => {
-    void fetchData();
-    const interval = setInterval(() => {
-      void fetchData();
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [fetchData]);
-
+export function ProxyViewer({
+  logs,
+  sessions,
+  models,
+  selectedSession,
+  selectedModel,
+  onSessionChange,
+  onModelChange,
+}: ProxyViewerProps): JSX.Element {
   return (
     <div className="max-w-[1200px] mx-auto p-6">
       <div className="flex items-center gap-4 mb-6">
@@ -407,7 +387,7 @@ export function ProxyViewer(): JSX.Element {
       </div>
 
       <div className="flex gap-3 mb-6">
-        <Select value={selectedSession} onValueChange={setSelectedSession}>
+        <Select value={selectedSession} onValueChange={onSessionChange}>
           <SelectTrigger className="flex-1 max-w-[400px] text-xs">
             <SelectValue placeholder="All sessions" />
           </SelectTrigger>
@@ -421,7 +401,7 @@ export function ProxyViewer(): JSX.Element {
           </SelectContent>
         </Select>
 
-        <Select value={selectedModel} onValueChange={setSelectedModel}>
+        <Select value={selectedModel} onValueChange={onModelChange}>
           <SelectTrigger className="text-xs">
             <SelectValue placeholder="All models" />
           </SelectTrigger>
