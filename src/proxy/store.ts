@@ -1,30 +1,11 @@
-import { ClaudeRequestSchema, type ClaudeRequest } from "./schemas";
+import { ClaudeRequestSchema, type CapturedLog, type ClaudeRequest } from "./schemas";
 
-export interface CapturedLog {
-  id: number;
-  timestamp: string;
-  method: string;
-  path: string;
-  model: string | null;
-  sessionId: string | null;
-  parsedRequest: ClaudeRequest | null;
-  rawRequestBody: string | null;
-  responseStatus: number | null;
-  responseText: string | null;
-  inputTokens: number | null;
-  outputTokens: number | null;
-  elapsedMs: number | null;
-  streaming: boolean;
-}
+export type { CapturedLog };
 
 let counter = 0;
 const logs: CapturedLog[] = [];
 
-export function createLog(
-  method: string,
-  path: string,
-  requestBody: string | null,
-): CapturedLog {
+export function createLog(method: string, path: string, requestBody: string | null): CapturedLog {
   let parsedRequest: ClaudeRequest | null = null;
   let model: string | null = null;
   let sessionId: string | null = null;
@@ -41,7 +22,9 @@ export function createLog(
         model = json?.model ?? null;
         sessionId = json?.metadata?.user_id ?? null;
       }
-    } catch {}
+    } catch {
+      // request body not valid JSON, skip parsing
+    }
   }
 
   const log: CapturedLog = {
@@ -63,10 +46,6 @@ export function createLog(
 
   logs.push(log);
   return log;
-}
-
-export function getLogs(): CapturedLog[] {
-  return logs;
 }
 
 export function getFilteredLogs(sessionId?: string, model?: string): CapturedLog[] {

@@ -82,6 +82,24 @@ export const ClaudeRequestSchema = z.object({
     .optional(),
 });
 
+export const CapturedLogSchema = z.object({
+  id: z.number(),
+  timestamp: z.string(),
+  method: z.string(),
+  path: z.string(),
+  model: z.string().nullable(),
+  sessionId: z.string().nullable(),
+  parsedRequest: ClaudeRequestSchema.nullable(),
+  rawRequestBody: z.string().nullable(),
+  responseStatus: z.number().nullable(),
+  responseText: z.string().nullable(),
+  inputTokens: z.number().nullable(),
+  outputTokens: z.number().nullable(),
+  elapsedMs: z.number().nullable(),
+  streaming: z.boolean(),
+});
+
 export type ClaudeRequest = z.infer<typeof ClaudeRequestSchema>;
+export type CapturedLog = z.infer<typeof CapturedLogSchema>;
 export type ContentBlockType = z.infer<typeof ContentBlock>;
 export type MessageType = z.infer<typeof Message>;

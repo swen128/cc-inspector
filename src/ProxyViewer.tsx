@@ -1,23 +1,20 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, type JSX } from "react";
 import ReactMarkdown from "react-markdown";
-import type { ClaudeRequest, ContentBlockType, MessageType } from "./proxy/schemas";
-
-interface CapturedLog {
-  id: number;
-  timestamp: string;
-  method: string;
-  path: string;
-  model: string | null;
-  sessionId: string | null;
-  parsedRequest: ClaudeRequest | null;
-  rawRequestBody: string | null;
-  responseStatus: number | null;
-  responseText: string | null;
-  inputTokens: number | null;
-  outputTokens: number | null;
-  elapsedMs: number | null;
-  streaming: boolean;
-}
+import { z } from "zod";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select";
+import {
+  CapturedLogSchema,
+  type CapturedLog,
+  type ClaudeRequest,
+  type ContentBlockType,
+  type MessageType,
+} from "./proxy/schemas";
 
 function prettifyJson(text: string): string {
   try {
@@ -34,23 +31,25 @@ function truncateSessionId(id: string): string {
 
 // ── Content block renderers ──────────────────────────────────────────────────
 
-function Markdown({ text }: { text: string }) {
-  return <div className="prose prose-sm dark:prose-invert max-w-none"><ReactMarkdown>{text}</ReactMarkdown></div>;
+function Markdown({ text }: { text: string }): JSX.Element {
+  return (
+    <div className="prose prose-sm dark:prose-invert max-w-none">
+      <ReactMarkdown>{text}</ReactMarkdown>
+    </div>
+  );
 }
 
-function TextBlock({ text }: { text: string }) {
+function TextBlock({ text }: { text: string }): JSX.Element {
   const isSystemReminder = text.includes("<system-reminder>");
   if (isSystemReminder) {
     return (
-      <div className="text-muted-foreground text-xs italic py-1 truncate">
-        [system-reminder]
-      </div>
+      <div className="text-muted-foreground text-xs italic py-1 truncate">[system-reminder]</div>
     );
   }
   return <Markdown text={text} />;
 }
 
-function ThinkingBlock({ thinking }: { thinking: string }) {
+function ThinkingBlock({ thinking }: { thinking: string }): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-l-2 border-purple-500/40 pl-3 my-1">
@@ -72,7 +71,13 @@ function ThinkingBlock({ thinking }: { thinking: string }) {
   );
 }
 
-function ToolUseBlock({ name, input }: { name: string; input: Record<string, unknown> }) {
+function ToolUseBlock({
+  name,
+  input,
+}: {
+  name: string;
+  input: Record<string, unknown>;
+}): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-l-2 border-blue-500/40 pl-3 my-1">
@@ -94,11 +99,17 @@ function ToolUseBlock({ name, input }: { name: string; input: Record<string, unk
   );
 }
 
-function ToolResultBlock({ content, isError }: { content: string | unknown[]; isError?: boolean }) {
+function ToolResultBlock({
+  content,
+  isError,
+}: {
+  content: string | unknown[];
+  isError?: boolean;
+}): JSX.Element {
   const [open, setOpen] = useState(false);
-  const label = isError ? "✘ Tool Error" : "↩ Tool Result";
-  const color = isError ? "text-red-400" : "text-green-400";
-  const borderColor = isError ? "border-red-500/40" : "border-green-500/40";
+  const label = isError === true ? "✘ Tool Error" : "↩ Tool Result";
+  const color = isError === true ? "text-red-400" : "text-green-400";
+  const borderColor = isError === true ? "border-red-500/40" : "border-green-500/40";
   const text = typeof content === "string" ? content : JSON.stringify(content, null, 2);
 
   return (
@@ -121,7 +132,11 @@ function ToolResultBlock({ content, isError }: { content: string | unknown[]; is
   );
 }
 
-function ToolDefBlock({ tool }: { tool: { name: string; description?: string; input_schema?: unknown } }) {
+function ToolDefBlock({
+  tool,
+}: {
+  tool: { name: string; description?: string; input_schema?: unknown };
+}): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div>
@@ -136,23 +151,23 @@ function ToolDefBlock({ tool }: { tool: { name: string; description?: string; in
       </button>
       {open && (
         <div className="ml-3 mt-1 space-y-1">
-          {tool.description && (
+          {tool.description !== undefined && (
             <div className="text-xs text-muted-foreground max-h-[40vh] overflow-auto">
               <Markdown text={tool.description} />
             </div>
           )}
-          {tool.input_schema && (
+          {tool.input_schema !== undefined && tool.input_schema !== null ? (
             <pre className="text-xs text-muted-foreground whitespace-pre-wrap max-h-[40vh] overflow-auto">
               {JSON.stringify(tool.input_schema, null, 2)}
             </pre>
-          )}
+          ) : null}
         </div>
       )}
     </div>
   );
 }
 
-function ContentBlockRenderer({ block }: { block: ContentBlockType }) {
+function ContentBlockRenderer({ block }: { block: ContentBlockType }): JSX.Element {
   switch (block.type) {
     case "text":
       return <TextBlock text={block.text} />;
@@ -169,23 +184,21 @@ function ContentBlockRenderer({ block }: { block: ContentBlockType }) {
   }
 }
 
-function MessageRenderer({ msg, index }: { msg: MessageType; index: number }) {
+function MessageRenderer({ msg, index }: { msg: MessageType; index: number }): JSX.Element {
   const isUser = msg.role === "user";
   const roleColor = isUser ? "text-green-400" : "text-orange-400";
   const roleLabel = isUser ? "USER" : "ASSISTANT";
 
-  const blocks = Array.isArray(msg.content)
+  const blocks: ContentBlockType[] = Array.isArray(msg.content)
     ? msg.content
     : [{ type: "text" as const, text: msg.content }];
 
   return (
     <div className="py-2 border-b border-border/50 last:border-b-0">
-      <div className={`text-xs font-bold ${roleColor} mb-1 font-mono`}>
-        {roleLabel}
-      </div>
+      <div className={`text-xs font-bold ${roleColor} mb-1 font-mono`}>{roleLabel}</div>
       <div className="text-sm space-y-1">
         {blocks.map((block, i) => (
-          <ContentBlockRenderer key={`${index}-${i}`} block={block as ContentBlockType} />
+          <ContentBlockRenderer key={`${index}-${i}`} block={block} />
         ))}
       </div>
     </div>
@@ -194,7 +207,7 @@ function MessageRenderer({ msg, index }: { msg: MessageType; index: number }) {
 
 // ── Parsed request view ──────────────────────────────────────────────────────
 
-function ParsedRequestView({ req }: { req: ClaudeRequest }) {
+function ParsedRequestView({ req }: { req: ClaudeRequest }): JSX.Element {
   const [showSystem, setShowSystem] = useState(false);
   const [showTools, setShowTools] = useState(false);
 
@@ -209,7 +222,8 @@ function ParsedRequestView({ req }: { req: ClaudeRequest }) {
               setShowSystem(!showSystem);
             }}
           >
-            system ({req.system.length} block{req.system.length > 1 ? "s" : ""}) {showSystem ? "▼" : "▶"}
+            system ({req.system.length} block{req.system.length > 1 ? "s" : ""}){" "}
+            {showSystem ? "▼" : "▶"}
           </button>
           {showSystem && (
             <div className="mt-1 space-y-1">
@@ -255,20 +269,20 @@ function ParsedRequestView({ req }: { req: ClaudeRequest }) {
 
 // ── Log entry ────────────────────────────────────────────────────────────────
 
-function LogEntry({ log }: { log: CapturedLog }) {
+function LogEntry({ log }: { log: CapturedLog }): JSX.Element {
   const [expanded, setExpanded] = useState(false);
   const [raw, setRaw] = useState(false);
 
   const statusColor =
-    log.responseStatus && log.responseStatus < 300
+    log.responseStatus !== null && log.responseStatus < 300
       ? "text-green-500"
-      : log.responseStatus && log.responseStatus < 400
+      : log.responseStatus !== null && log.responseStatus < 400
         ? "text-yellow-500"
         : "text-red-500";
 
   const tokens = [
-    log.inputTokens != null ? `in: ${log.inputTokens.toLocaleString()}` : null,
-    log.outputTokens != null ? `out: ${log.outputTokens.toLocaleString()}` : null,
+    log.inputTokens !== null ? `in: ${log.inputTokens.toLocaleString()}` : null,
+    log.outputTokens !== null ? `out: ${log.outputTokens.toLocaleString()}` : null,
   ]
     .filter(Boolean)
     .join(" / ");
@@ -280,14 +294,18 @@ function LogEntry({ log }: { log: CapturedLog }) {
     >
       <div className="flex items-center gap-3 px-4 py-3 bg-muted/50">
         <span className="text-blue-500 font-bold text-xs font-mono">#{log.id}</span>
-        {log.model && <span className="text-purple-500 text-xs font-mono">{log.model}</span>}
-        {log.responseStatus && (
+        {log.model !== null && (
+          <span className="text-purple-500 text-xs font-mono">{log.model}</span>
+        )}
+        {log.responseStatus !== null && (
           <span className={`${statusColor} font-bold font-mono`}>{log.responseStatus}</span>
         )}
-        {log.elapsedMs != null && (
+        {log.elapsedMs !== null && (
           <span className="text-muted-foreground text-xs font-mono">{log.elapsedMs}ms</span>
         )}
-        {tokens && <span className="text-muted-foreground text-xs font-mono">[{tokens}]</span>}
+        {tokens !== "" && (
+          <span className="text-muted-foreground text-xs font-mono">[{tokens}]</span>
+        )}
         <span className="flex-1" />
         <span className="text-muted-foreground text-xs">{expanded ? "▼" : "▶"}</span>
       </div>
@@ -308,7 +326,7 @@ function LogEntry({ log }: { log: CapturedLog }) {
               <pre className="text-xs text-foreground max-h-[80vh] overflow-auto font-mono whitespace-pre-wrap break-words">
                 {prettifyJson(log.rawRequestBody ?? "")}
               </pre>
-              {log.responseText && (
+              {log.responseText !== null && (
                 <>
                   <div className={`text-xs font-bold my-2 font-mono ${statusColor}`}>RESPONSE</div>
                   <pre className="text-xs text-foreground max-h-[80vh] overflow-auto font-mono whitespace-pre-wrap break-words">
@@ -330,7 +348,7 @@ function LogEntry({ log }: { log: CapturedLog }) {
                 )}
               </div>
 
-              {log.responseText && (
+              {log.responseText !== null && (
                 <div className="px-4 py-3">
                   <div className={`text-xs font-bold mb-2 font-mono ${statusColor}`}>RESPONSE</div>
                   <div className="text-sm max-h-[80vh] overflow-auto">
@@ -348,17 +366,17 @@ function LogEntry({ log }: { log: CapturedLog }) {
 
 // ── Main viewer ──────────────────────────────────────────────────────────────
 
-export function ProxyViewer() {
+export function ProxyViewer(): JSX.Element {
   const [logs, setLogs] = useState<CapturedLog[]>([]);
   const [sessions, setSessions] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
-  const [selectedSession, setSelectedSession] = useState("");
-  const [selectedModel, setSelectedModel] = useState("");
+  const [selectedSession, setSelectedSession] = useState("__all__");
+  const [selectedModel, setSelectedModel] = useState("__all__");
 
   const fetchData = useCallback(async () => {
     const params = new URLSearchParams();
-    if (selectedSession) params.set("sessionId", selectedSession);
-    if (selectedModel) params.set("model", selectedModel);
+    if (selectedSession !== "__all__") params.set("sessionId", selectedSession);
+    if (selectedModel !== "__all__") params.set("model", selectedModel);
 
     const [logsRes, sessionsRes, modelsRes] = await Promise.all([
       fetch(`/api/logs?${params}`),
@@ -366,14 +384,16 @@ export function ProxyViewer() {
       fetch("/api/models"),
     ]);
 
-    setLogs(await logsRes.json());
-    setSessions(await sessionsRes.json());
-    setModels(await modelsRes.json());
+    setLogs(z.array(CapturedLogSchema).parse(await logsRes.json()));
+    setSessions(z.array(z.string()).parse(await sessionsRes.json()));
+    setModels(z.array(z.string()).parse(await modelsRes.json()));
   }, [selectedSession, selectedModel]);
 
   useEffect(() => {
-    fetchData();
-    const interval = setInterval(fetchData, 2000);
+    void fetchData();
+    const interval = setInterval(() => {
+      void fetchData();
+    }, 2000);
     return () => clearInterval(interval);
   }, [fetchData]);
 
@@ -387,27 +407,33 @@ export function ProxyViewer() {
       </div>
 
       <div className="flex gap-3 mb-6">
-        <select
-          value={selectedSession}
-          onChange={(e) => setSelectedSession(e.target.value)}
-          className="bg-muted border border-border rounded-md px-3 py-2 text-xs text-foreground flex-1 max-w-[400px]"
-        >
-          <option value="">All sessions</option>
-          {sessions.map((s) => (
-            <option key={s} value={s}>{truncateSessionId(s)}</option>
-          ))}
-        </select>
+        <Select value={selectedSession} onValueChange={setSelectedSession}>
+          <SelectTrigger className="flex-1 max-w-[400px] text-xs">
+            <SelectValue placeholder="All sessions" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="__all__">All sessions</SelectItem>
+            {sessions.map((s) => (
+              <SelectItem key={s} value={s}>
+                {truncateSessionId(s)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
-        <select
-          value={selectedModel}
-          onChange={(e) => setSelectedModel(e.target.value)}
-          className="bg-muted border border-border rounded-md px-3 py-2 text-xs text-foreground"
-        >
-          <option value="">All models</option>
-          {models.map((m) => (
-            <option key={m} value={m}>{m}</option>
-          ))}
-        </select>
+        <Select value={selectedModel} onValueChange={setSelectedModel}>
+          <SelectTrigger className="text-xs">
+            <SelectValue placeholder="All models" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="__all__">All models</SelectItem>
+            {models.map((m) => (
+              <SelectItem key={m} value={m}>
+                {m}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <div>

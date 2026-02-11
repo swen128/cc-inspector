@@ -13,7 +13,7 @@ const STRIP_REQUEST_HEADERS = new Set([
   "proxy-connection",
 ]);
 
-function extractStreamContent(raw: string, log: CapturedLog) {
+function extractStreamContent(raw: string, log: CapturedLog): string {
   const textParts: string[] = [];
 
   for (const line of raw.split("\n")) {
@@ -30,7 +30,9 @@ function extractStreamContent(raw: string, log: CapturedLog) {
       if (data.type === "message_delta" && data.usage) {
         log.outputTokens = data.usage.output_tokens ?? null;
       }
-    } catch {}
+    } catch {
+      // non-JSON SSE line, skip
+    }
   }
 
   return textParts.join("");
@@ -80,8 +82,7 @@ export async function handleProxy(req: Request): Promise<Response> {
   responseHeaders.delete("content-encoding");
   responseHeaders.delete("content-length");
 
-  const isStream =
-    upstreamRes.headers.get("content-type")?.includes("text/event-stream") ?? false;
+  const isStream = upstreamRes.headers.get("content-type")?.includes("text/event-stream") ?? false;
 
   if (!isStream) {
     const responseBody = await upstreamRes.text();
@@ -125,7 +126,11 @@ export async function handleProxy(req: Request): Promise<Response> {
     },
   });
 
-  const loggedStream = upstreamRes.body!.pipeThrough(transform);
+  if (upstreamRes.body === null) {
+    return new Response("No response body", { status: 502 });
+  }
+
+  const loggedStream = upstreamRes.body.pipeThrough(transform);
 
   return new Response(loggedStream, {
     status: upstreamRes.status,

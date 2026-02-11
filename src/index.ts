@@ -6,13 +6,13 @@ import { getFilteredLogs, getSessions, getModels } from "./proxy/store";
 const server = serve({
   routes: {
     "/api/hello": {
-      async GET(req) {
+      GET(_req) {
         return Response.json({
           message: "Hello, world!",
           method: "GET",
         });
       },
-      async PUT(req) {
+      PUT(_req) {
         return Response.json({
           message: "Hello, world!",
           method: "PUT",
@@ -20,7 +20,7 @@ const server = serve({
       },
     },
 
-    "/api/hello/:name": async req => {
+    "/api/hello/:name": (req) => {
       const name = req.params.name;
       return Response.json({
         message: `Hello, ${name}!`,
@@ -29,8 +29,8 @@ const server = serve({
 
     "/api/logs": (req) => {
       const url = new URL(req.url);
-      const sessionId = url.searchParams.get("sessionId") || undefined;
-      const model = url.searchParams.get("model") || undefined;
+      const sessionId = url.searchParams.get("sessionId") ?? undefined;
+      const model = url.searchParams.get("model") ?? undefined;
       return Response.json(getFilteredLogs(sessionId, model));
     },
 
