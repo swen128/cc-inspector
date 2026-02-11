@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(eslint.config.js)",
+      "Edit(eslint.config.ts)",
+      "Edit(eslint.config.mjs)",
+      "Edit(eslint.config.cjs)",
+      "Edit(.eslintrc)",
+      "Edit(.eslintrc.js)",
+      "Edit(.eslintrc.json)",
+      "Edit(.eslintrc.yml)",
+      "Edit(.eslintrc.yaml)",
+      "Edit(.eslintrc.cjs)",
+      "Write(eslint.config.js)",
+      "Write(eslint.config.ts)",
+      "Write(eslint.config.mjs)",
+      "Write(eslint.config.cjs)",
+      "Write(.eslintrc)",
+      "Write(.eslintrc.js)",
+      "Write(.eslintrc.json)",
+      "Write(.eslintrc.yml)",
+      "Write(.eslintrc.yaml)",
+      "Write(.eslintrc.cjs)",
+      "Edit(.claude/sandbox/**)",
+      "Write(.claude/sandbox/**)"
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_SHELL_PREFIX": ".claude/sandbox/run.sh"
+  }
+}

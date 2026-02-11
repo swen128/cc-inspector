@@ -1,0 +1,10 @@
+(version 1)
+
+(allow default)
+
+(deny file-write*
+  (regex
+#"(^|/)(\.?eslint(\.config)?\.(js|ts|mjs|cjs|json|yml|yaml)|\.eslintrc)$"))
+
+(deny file-write*
+  (regex #"(^|/)\.claude/sandbox/"))
