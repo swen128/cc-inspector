@@ -115,6 +115,93 @@ export const ClaudeRequestSchema = z.object({
     .optional(),
 });
 
+const ResponseContentBlock = z.discriminatedUnion("type", [
+  TextContentBlock,
+  ThinkingContentBlock,
+  ToolUseContentBlock,
+]);
+
+const ResponseUsageSchema = z.object({
+  input_tokens: z.number(),
+  output_tokens: z.number(),
+});
+
+export const ClaudeResponseSchema = z.object({
+  id: z.string(),
+  type: z.literal("message"),
+  model: z.string(),
+  role: z.literal("assistant"),
+  content: z.array(ResponseContentBlock),
+  stop_reason: z.string().nullable(),
+  stop_sequence: z.string().nullable(),
+  usage: ResponseUsageSchema,
+});
+
+const SseMessageStartEvent = z.object({
+  type: z.literal("message_start"),
+  message: z.object({
+    id: z.string(),
+    type: z.literal("message"),
+    model: z.string(),
+    role: z.literal("assistant"),
+    content: z.array(ResponseContentBlock),
+    stop_reason: z.null(),
+    stop_sequence: z.null(),
+    usage: z.object({ input_tokens: z.number() }),
+  }),
+});
+
+const SseContentBlockStartEvent = z.object({
+  type: z.literal("content_block_start"),
+  index: z.number(),
+  content_block: ResponseContentBlock,
+});
+
+const SseDeltaBlock = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("text_delta"), text: z.string() }),
+  z.object({ type: z.literal("input_json_delta"), partial_json: z.string() }),
+  z.object({ type: z.literal("thinking_delta"), thinking: z.string() }),
+  z.object({ type: z.literal("signature_delta"), signature: z.string() }),
+]);
+
+const SseContentBlockDeltaEvent = z.object({
+  type: z.literal("content_block_delta"),
+  index: z.number(),
+  delta: SseDeltaBlock,
+});
+
+const SseContentBlockStopEvent = z.object({
+  type: z.literal("content_block_stop"),
+  index: z.number(),
+});
+
+const SseMessageDeltaEvent = z.object({
+  type: z.literal("message_delta"),
+  delta: z.object({
+    stop_reason: z.string().nullable(),
+    stop_sequence: z.string().nullable(),
+  }),
+  usage: z.object({ output_tokens: z.number() }),
+});
+
+const SseMessageStopEvent = z.object({
+  type: z.literal("message_stop"),
+});
+
+const SsePingEvent = z.object({
+  type: z.literal("ping"),
+});
+
+export const SseEventSchema = z.discriminatedUnion("type", [
+  SseMessageStartEvent,
+  SseContentBlockStartEvent,
+  SseContentBlockDeltaEvent,
+  SseContentBlockStopEvent,
+  SseMessageDeltaEvent,
+  SseMessageStopEvent,
+  SsePingEvent,
+]);
+
 export const CapturedLogSchema = z.object({
   id: z.number(),
   timestamp: z.string(),

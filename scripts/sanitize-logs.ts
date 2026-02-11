@@ -4,7 +4,6 @@ import { join } from "node:path";
 const LOGS_DIR = "logs";
 const OUT_DIR = "src/proxy/__fixtures__";
 
-// Zod discriminator/enum literals — replacing these would break schema validation
 const KEEP_VALUES = new Set([
   "text",
   "thinking",
@@ -14,6 +13,18 @@ const KEEP_VALUES = new Set([
   "base64",
   "user",
   "assistant",
+  "message",
+  "message_start",
+  "content_block_start",
+  "content_block_delta",
+  "content_block_stop",
+  "message_delta",
+  "message_stop",
+  "ping",
+  "text_delta",
+  "input_json_delta",
+  "thinking_delta",
+  "signature_delta",
 ]);
 
 function sanitize(value: unknown): unknown {
@@ -33,33 +44,81 @@ function sanitize(value: unknown): unknown {
   return value;
 }
 
-await mkdir(OUT_DIR, { recursive: true });
-
-const args = process.argv.slice(2);
-const files = args.length > 0 ? args : (await readdir(LOGS_DIR)).filter((f) => f.endsWith(".json"));
-
-const seen = new Set<string>();
-let written = 0;
-let skipped = 0;
-
-for (const file of files) {
-  const path = join(LOGS_DIR, file);
-  const text = await Bun.file(path).text();
-  const log = JSON.parse(text);
-  const body = log.request?.body;
-  if (!body) continue;
-
-  const content = JSON.stringify(sanitize(body), null, 2) + "\n";
+function writeFixture(
+  prefix: string,
+  data: unknown,
+  seen: Set<string>,
+  stats: { written: number; skipped: number },
+): Promise<void> | undefined {
+  const content = JSON.stringify(sanitize(data), null, 2) + "\n";
   const hash = Bun.hash(content).toString(36);
 
   if (seen.has(hash)) {
-    skipped++;
-    continue;
+    stats.skipped++;
+    return;
   }
   seen.add(hash);
-
-  await Bun.write(join(OUT_DIR, `${hash}.json`), content);
-  written++;
+  stats.written++;
+  return Bun.write(join(OUT_DIR, `${prefix}-${hash}.json`), content).then(() => undefined);
 }
 
-console.log(`Wrote ${String(written)} fixtures, skipped ${String(skipped)} duplicates`);
+await mkdir(OUT_DIR, { recursive: true });
+
+const args = process.argv.slice(2);
+const allFiles =
+  args.length > 0
+    ? args
+    : await readdir(LOGS_DIR).then((fs) =>
+        fs.filter((f) => f.endsWith(".json") || f.endsWith(".stream.txt")),
+      );
+
+const reqSeen = new Set<string>();
+const respSeen = new Set<string>();
+const sseSeen = new Set<string>();
+const reqStats = { written: 0, skipped: 0 };
+const respStats = { written: 0, skipped: 0 };
+const sseStats = { written: 0, skipped: 0 };
+
+for (const file of allFiles) {
+  const path = join(LOGS_DIR, file);
+  const text = await Bun.file(path).text();
+
+  if (file.endsWith(".stream.txt")) {
+    for (const line of text.split("\n")) {
+      if (!line.startsWith("data: ")) continue;
+      try {
+        const json: unknown = JSON.parse(line.slice(6));
+        await writeFixture("sse", json, sseSeen, sseStats);
+      } catch {}
+    }
+    continue;
+  }
+
+  const log = JSON.parse(text) as {
+    request?: { body?: unknown };
+    response?: { body?: Record<string, unknown> };
+  };
+
+  if (log.request?.body != null) {
+    await writeFixture("req", log.request.body, reqSeen, reqStats);
+  }
+
+  if (
+    log.response?.body !== undefined &&
+    log.response.body !== null &&
+    typeof log.response.body === "object" &&
+    log.response.body["type"] === "message"
+  ) {
+    await writeFixture("resp", log.response.body, respSeen, respStats);
+  }
+}
+
+console.log(
+  `Requests:  ${String(reqStats.written)} written, ${String(reqStats.skipped)} duplicates`,
+);
+console.log(
+  `Responses: ${String(respStats.written)} written, ${String(respStats.skipped)} duplicates`,
+);
+console.log(
+  `SSE:       ${String(sseStats.written)} written, ${String(sseStats.skipped)} duplicates`,
+);

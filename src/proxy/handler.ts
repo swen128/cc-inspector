@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { createLog, type CapturedLog } from "./store";
+import { ClaudeResponseSchema, SseEventSchema } from "./schemas";
 
 const UPSTREAM = "https://api.anthropic.com";
 
@@ -14,27 +14,6 @@ const STRIP_REQUEST_HEADERS = new Set([
   "proxy-connection",
 ]);
 
-const SseEventSchema = z.object({
-  type: z.string(),
-  message: z
-    .object({
-      usage: z.object({ input_tokens: z.number() }).optional(),
-      model: z.string().optional(),
-    })
-    .optional(),
-  delta: z.object({ text: z.string() }).optional(),
-  usage: z.object({ output_tokens: z.number() }).optional(),
-});
-
-const NonStreamResponseSchema = z.object({
-  usage: z
-    .object({
-      input_tokens: z.number(),
-      output_tokens: z.number(),
-    })
-    .optional(),
-});
-
 function extractStreamContent(raw: string, log: CapturedLog): string {
   const textParts: string[] = [];
 
@@ -45,15 +24,15 @@ function extractStreamContent(raw: string, log: CapturedLog): string {
       const parsed = SseEventSchema.safeParse(json);
       if (!parsed.success) continue;
       const data = parsed.data;
-      if (data.type === "message_start" && data.message !== undefined) {
-        log.inputTokens = data.message.usage?.input_tokens ?? null;
-        if (log.model === null) log.model = data.message.model ?? null;
+      if (data.type === "message_start") {
+        log.inputTokens = data.message.usage.input_tokens;
+        if (log.model === null) log.model = data.message.model;
       }
-      if (data.type === "content_block_delta" && data.delta?.text !== undefined) {
+      if (data.type === "content_block_delta" && data.delta.type === "text_delta") {
         textParts.push(data.delta.text);
       }
-      if (data.type === "message_delta" && data.usage !== undefined) {
-        log.outputTokens = data.usage.output_tokens ?? null;
+      if (data.type === "message_delta") {
+        log.outputTokens = data.usage.output_tokens;
       }
     } catch {
       // non-JSON SSE line, skip
@@ -117,8 +96,8 @@ export async function handleProxy(req: Request): Promise<Response> {
       try {
         const json: unknown = JSON.parse(responseBody);
         log.responseText = JSON.stringify(json);
-        const parsed = NonStreamResponseSchema.safeParse(json);
-        if (parsed.success && parsed.data.usage !== undefined) {
+        const parsed = ClaudeResponseSchema.safeParse(json);
+        if (parsed.success) {
           log.inputTokens = parsed.data.usage.input_tokens;
           log.outputTokens = parsed.data.usage.output_tokens;
         }

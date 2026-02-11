@@ -1,0 +1,23 @@
+{
+  "type": "message_start",
+  "message": {
+    "model": "<string>",
+    "id": "<string>",
+    "type": "message",
+    "role": "assistant",
+    "content": [],
+    "stop_reason": null,
+    "stop_sequence": null,
+    "usage": {
+      "input_tokens": 3,
+      "cache_creation_input_tokens": 336,
+      "cache_read_input_tokens": 20430,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 336
+      },
+      "output_tokens": 1,
+      "service_tier": "<string>"
+    }
+  }
+}

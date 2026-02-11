@@ -1,0 +1,8 @@
+{
+  "type": "content_block_delta",
+  "index": 1,
+  "delta": {
+    "type": "signature_delta",
+    "signature": "<string>"
+  }
+}

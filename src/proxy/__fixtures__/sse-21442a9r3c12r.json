@@ -1,0 +1,16 @@
+{
+  "type": "message_delta",
+  "delta": {
+    "stop_reason": "<string>",
+    "stop_sequence": null
+  },
+  "usage": {
+    "input_tokens": 3,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 20430,
+    "output_tokens": 43
+  },
+  "context_management": {
+    "applied_edits": []
+  }
+}

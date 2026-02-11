@@ -14,11 +14,30 @@
         },
         {
           "type": "text",
-          "text": "<string>",
-          "cache_control": {
-            "type": "<string>",
-            "ttl": "<string>"
+          "text": "<string>"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "<string>",
+          "name": "<string>",
+          "input": {
+            "file_path": "<string>"
           }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "<string>",
+          "content": "<string>"
         }
       ]
     }
@@ -627,7 +646,7 @@
         "properties": {
           "type": {
             "type": "<string>",
-            "enum": ["<string>", "<string>", "<string>", "<string>", "<string>"],
+            "enum": ["message", "<string>", "<string>", "<string>", "<string>"],
             "description": "<string>"
           },
           "recipient": {
