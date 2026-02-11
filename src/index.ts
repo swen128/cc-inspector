@@ -46,7 +46,7 @@ const server = serve({
     "/*": index,
   },
 
-  development: process.env.NODE_ENV === "development" && {
+  development: process.env.NODE_ENV !== "production" && {
     hmr: true,
     console: true,
   },
