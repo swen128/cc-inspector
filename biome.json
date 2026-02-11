@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -33,17 +33,8 @@
       "lineEnding": "lf"
     }
   },
-  "css": {
-    "parser": {
-      "cssModules": false,
-      "tailwindDirectives": true
-    },
-    "formatter": {
-      "enabled": true
-    }
-  },
   "files": {
-    "includes": ["**", "!**/eslint.config.*"],
+    "includes": ["**/*.{ts,tsx,js,jsx,json,jsonc}"],
     "ignoreUnknown": false
   }
 }
