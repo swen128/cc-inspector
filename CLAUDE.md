@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Project Is
 
-cc-proxy is a transparent HTTP proxy for the Anthropic Claude API that captures and displays requests/responses in a web UI. It intercepts Claude Code's API traffic so users can inspect system prompts, tool definitions, messages, and token usage in real time.
+cc-inspector is a transparent HTTP proxy for the Anthropic Claude API that captures and displays requests/responses in a web UI. It intercepts Claude Code's API traffic so users can inspect system prompts, tool definitions, messages, and token usage in real time.
 
 Usage: run the proxy, then launch Claude Code with `ANTHROPIC_BASE_URL=http://localhost:25947/proxy claude` to route traffic through it.
 
@@ -46,24 +46,25 @@ When you encounter any lint error, address the root cause by following FP princi
 
 ## Architecture
 
-The app is a single `Bun.serve()` server (`src/index.ts`) that handles both the proxy backend and the React frontend via HTML imports.
+The app is a single `Bun.serve()` server (`src/index.ts`) that handles both the proxy backend and the React frontend via HTML imports. Routes are declared in a `routes` object: `/proxy/*` forwards to the handler, `/api/*` serves store queries, and `/*` serves the HTML entrypoint.
 
 ### Proxy layer (`src/proxy/`)
 
-- **`handler.ts`** — `handleProxy()` intercepts requests on `/proxy/*`, strips hop-by-hop headers, forwards to `https://api.anthropic.com`, and captures both streaming (SSE) and non-streaming responses. For streams, it uses `TransformStream` to tap chunks without buffering.
-- **`store.ts`** — In-memory log store. `createLog()` parses request bodies against `ClaudeRequestSchema` to extract model, session ID (`metadata.user_id`), and structured message data. Provides filtered queries by session and model.
-- **`schemas.ts`** — Zod schemas for the Claude Messages API request format (system blocks, messages with content blocks, tool definitions). Exported types `ClaudeRequest`, `ContentBlockType`, `MessageType` are shared between server and frontend.
+- **`handler.ts`** — `handleProxy()` intercepts requests on `/proxy/*`, strips hop-by-hop headers, forwards to `https://api.anthropic.com`, and captures both streaming (SSE) and non-streaming responses. For streams, it uses `TransformStream` to tap chunks without buffering. SSE events are parsed via `SseEventSchema` to extract token usage and text content.
+- **`store.ts`** — In-memory log store. `createLog()` loosely parses request bodies to extract model and session ID (`metadata.user_id`). Provides filtered queries by session and model.
+- **`schemas.ts`** — Zod schemas for the Claude Messages API (requests, responses, SSE events, captured logs). The `CapturedLogSchema` is used both server-side and client-side (the container component parses API responses with it). Exported types like `ClaudeRequest`, `ContentBlockType`, `MessageType` are shared across the codebase — keep this file isomorphic.
 
-### Frontend (`src/`)
+### Frontend (`src/components/`)
 
-- **`index.ts`** — Bun.serve routes: `/proxy/*` to handler, `/api/logs|sessions|models` to store queries, `/*` to the HTML entrypoint.
-- **`ProxyViewerContainer.tsx`** — Container component. Fetches data from `/api/logs` (polls every 2s), manages filter state, and passes everything as props to the presentational component.
-- **`ProxyViewer.tsx`** — Presentational component. Renders captured API calls as expandable cards showing system prompts, tools, messages (with content block renderers for text/thinking/tool_use/tool_result), and response. Pure props-in, JSX-out — no data fetching.
+- **`ProxyViewerContainer.tsx`** — Container component. Fetches from `/api/logs` (polls every 2s), parses responses with `CapturedLogSchema`, manages filter state, and passes props to the presentational component.
+- **`ProxyViewer.tsx`** — Top-level presentational component. Renders the filter bar and list of log entries.
+- **`proxy-viewer/`** — Sub-components for rendering log entries: `LogEntry`, `LogEntryHeader`, `RequestView`, `ResponseView`, `SystemPrompt`, `ToolDefinitions`, `MessageThread`, and `content-blocks` (renderers for text/thinking/tool_use/tool_result blocks).
 - **`frontend.tsx`** — React entrypoint with HMR support.
 
 ### Key design decisions
 
 - **Presentational/container split**: UI components are split into a container (data fetching, state) and a presentational component (pure rendering). Presentational components get Ladle stories.
-- Schemas in `src/proxy/schemas.ts` are imported by both server and frontend code — keep them isomorphic.
-- Logs are stored in memory only (no persistence across restarts). The `logs/` directory contains sample captured JSON files for reference/testing.
+- **Zod at boundaries**: `Response.json()` returns `any`, so all API responses are parsed through Zod schemas rather than using type assertions. The frontend uses `z.array(CapturedLogSchema).parse()` on fetch results.
+- Logs are stored in memory only (no persistence across restarts).
 - The proxy strips `accept-encoding` to avoid dealing with compressed upstream responses.
+- `noUncheckedIndexedAccess` is enabled — array indexing returns `T | undefined`.
