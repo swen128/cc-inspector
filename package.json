@@ -1,6 +1,6 @@
 {
   "name": "cc-inspector",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Transparent proxy for the Anthropic Claude API that captures and displays requests/responses in a web UI",
   "license": "MIT",
