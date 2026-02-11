@@ -20,11 +20,17 @@
           },
           "query_type": {
             "type": "<string>",
-            "enum": ["<string>", "user"]
+            "enum": [
+              "<string>",
+              "user"
+            ]
           },
           "content_search_mode": {
             "type": "<string>",
-            "enum": ["<string>", "<string>"]
+            "enum": [
+              "<string>",
+              "<string>"
+            ]
           },
           "data_source_url": {
             "type": "<string>",
@@ -71,7 +77,9 @@
             "description": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false,
         "$schema": "<string>"
       }

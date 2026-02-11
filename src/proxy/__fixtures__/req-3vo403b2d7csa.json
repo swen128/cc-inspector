@@ -35,7 +35,10 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>", "text"],
+        "required": [
+          "<string>",
+          "text"
+        ],
         "$schema": "<string>",
         "additionalProperties": false
       }

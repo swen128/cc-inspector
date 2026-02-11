@@ -53,7 +53,11 @@
             "default": null
           }
         },
-        "required": ["<string>", "<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false,
         "$schema": "<string>"
       }

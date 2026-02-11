@@ -49,7 +49,9 @@
             "description": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false,
         "$schema": "<string>"
       }

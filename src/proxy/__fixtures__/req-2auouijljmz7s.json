@@ -28,18 +28,30 @@
           "button": {
             "description": "<string>",
             "type": "<string>",
-            "enum": ["<string>", "<string>", "<string>"]
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
           },
           "modifiers": {
             "description": "<string>",
             "type": "<string>",
             "items": {
               "type": "<string>",
-              "enum": ["<string>", "<string>", "<string>", "<string>", "<string>"]
+              "enum": [
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>"
+              ]
             }
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "$schema": "<string>",
         "additionalProperties": false
       }

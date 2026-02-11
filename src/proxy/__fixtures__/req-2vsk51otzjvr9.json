@@ -51,7 +51,10 @@
             ]
           }
         },
-        "required": ["<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       }
     }

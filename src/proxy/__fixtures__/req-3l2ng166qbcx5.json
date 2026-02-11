@@ -17,7 +17,10 @@
             "default": "<string>",
             "description": "<string>",
             "type": "<string>",
-            "enum": ["<string>", "<string>"]
+            "enum": [
+              "<string>",
+              "<string>"
+            ]
           },
           "filename": {
             "description": "<string>",
@@ -36,7 +39,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "$schema": "<string>",
         "additionalProperties": false
       }

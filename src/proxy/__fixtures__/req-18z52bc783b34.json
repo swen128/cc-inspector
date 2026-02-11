@@ -24,7 +24,9 @@
                     "description": "<string>"
                   }
                 },
-                "required": ["<string>"],
+                "required": [
+                  "<string>"
+                ],
                 "additionalProperties": true
               },
               {
@@ -34,17 +36,26 @@
                     "properties": {
                       "command": {
                         "type": "<string>",
-                        "enum": ["<string>"]
+                        "enum": [
+                          "<string>"
+                        ]
                       },
                       "properties": {
                         "type": "<string>",
                         "additionalProperties": {
-                          "type": ["<string>", "<string>", "<string>"]
+                          "type": [
+                            "<string>",
+                            "<string>",
+                            "<string>"
+                          ]
                         },
                         "description": "<string>"
                       }
                     },
-                    "required": ["<string>", "<string>"],
+                    "required": [
+                      "<string>",
+                      "<string>"
+                    ],
                     "additionalProperties": true
                   },
                   {
@@ -52,7 +63,9 @@
                     "properties": {
                       "command": {
                         "type": "<string>",
-                        "enum": ["<string>"]
+                        "enum": [
+                          "<string>"
+                        ]
                       },
                       "new_str": {
                         "type": "<string>",
@@ -62,7 +75,10 @@
                         "type": "<string>"
                       }
                     },
-                    "required": ["<string>", "<string>"],
+                    "required": [
+                      "<string>",
+                      "<string>"
+                    ],
                     "additionalProperties": true
                   },
                   {
@@ -70,7 +86,9 @@
                     "properties": {
                       "command": {
                         "type": "<string>",
-                        "enum": ["<string>"]
+                        "enum": [
+                          "<string>"
+                        ]
                       },
                       "selection_with_ellipsis": {
                         "type": "<string>",
@@ -84,7 +102,11 @@
                         "type": "<string>"
                       }
                     },
-                    "required": ["<string>", "<string>", "<string>"],
+                    "required": [
+                      "<string>",
+                      "<string>",
+                      "<string>"
+                    ],
                     "additionalProperties": true
                   },
                   {
@@ -92,7 +114,9 @@
                     "properties": {
                       "command": {
                         "type": "<string>",
-                        "enum": ["<string>"]
+                        "enum": [
+                          "<string>"
+                        ]
                       },
                       "selection_with_ellipsis": {
                         "type": "<string>",
@@ -103,7 +127,11 @@
                         "description": "<string>"
                       }
                     },
-                    "required": ["<string>", "<string>", "<string>"],
+                    "required": [
+                      "<string>",
+                      "<string>",
+                      "<string>"
+                    ],
                     "additionalProperties": true
                   }
                 ]
@@ -112,7 +140,9 @@
             "description": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false,
         "$schema": "<string>"
       }

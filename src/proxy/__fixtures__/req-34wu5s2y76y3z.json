@@ -16,7 +16,12 @@
         "properties": {
           "action": {
             "type": "<string>",
-            "enum": ["<string>", "<string>", "<string>", "<string>"],
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ],
             "description": "<string>"
           },
           "index": {
@@ -24,7 +29,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "$schema": "<string>",
         "additionalProperties": false
       }

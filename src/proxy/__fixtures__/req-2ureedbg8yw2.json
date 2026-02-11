@@ -58,7 +58,9 @@
             "default": null
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false,
         "$schema": "<string>"
       }

@@ -34,10 +34,14 @@
                   },
                   "type": {
                     "type": "<string>",
-                    "enum": ["<string>"]
+                    "enum": [
+                      "<string>"
+                    ]
                   }
                 },
-                "required": ["<string>"],
+                "required": [
+                  "<string>"
+                ],
                 "additionalProperties": true
               },
               {
@@ -49,10 +53,14 @@
                   },
                   "type": {
                     "type": "<string>",
-                    "enum": ["<string>"]
+                    "enum": [
+                      "<string>"
+                    ]
                   }
                 },
-                "required": ["<string>"],
+                "required": [
+                  "<string>"
+                ],
                 "additionalProperties": true
               },
               {
@@ -64,10 +72,14 @@
                   },
                   "type": {
                     "type": "<string>",
-                    "enum": ["<string>"]
+                    "enum": [
+                      "<string>"
+                    ]
                   }
                 },
-                "required": ["<string>"],
+                "required": [
+                  "<string>"
+                ],
                 "additionalProperties": true
               },
               {
@@ -75,17 +87,24 @@
                 "properties": {
                   "type": {
                     "type": "<string>",
-                    "enum": ["<string>"]
+                    "enum": [
+                      "<string>"
+                    ]
                   }
                 },
-                "required": ["<string>"],
+                "required": [
+                  "<string>"
+                ],
                 "additionalProperties": true
               }
             ],
             "description": "<string>"
           }
         },
-        "required": ["<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false,
         "$schema": "<string>"
       }

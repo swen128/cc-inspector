@@ -30,7 +30,10 @@
             "description": "<string>"
           }
         },
-        "required": ["<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>"
+        ],
         "$schema": "<string>",
         "additionalProperties": false
       }

@@ -18,14 +18,21 @@
             "default": "<string>",
             "description": "<string>",
             "type": "<string>",
-            "enum": ["<string>", "<string>", "<string>", "<string>"]
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
           },
           "filename": {
             "description": "<string>",
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "$schema": "<string>",
         "additionalProperties": false
       }

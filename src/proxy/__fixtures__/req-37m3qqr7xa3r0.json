@@ -37,7 +37,10 @@
             "default": null
           },
           "projectSlugOrId": {
-            "type": ["<string>", "<string>"],
+            "type": [
+              "<string>",
+              "<string>"
+            ],
             "description": "<string>"
           },
           "transactionName": {

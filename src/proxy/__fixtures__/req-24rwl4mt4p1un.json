@@ -60,7 +60,11 @@
           "model": {
             "description": "<string>",
             "type": "<string>",
-            "enum": ["<string>", "<string>", "<string>"]
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
           },
           "resume": {
             "description": "<string>",
@@ -87,10 +91,21 @@
           "mode": {
             "description": "<string>",
             "type": "<string>",
-            "enum": ["<string>", "<string>", "<string>", "<string>", "<string>", "<string>"]
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
           }
         },
-        "required": ["<string>", "<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -118,7 +133,11 @@
             "maximum": 600000
           }
         },
-        "required": ["<string>", "<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -150,7 +169,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -170,7 +191,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -196,7 +219,11 @@
           "output_mode": {
             "description": "<string>",
             "type": "<string>",
-            "enum": ["<string>", "<string>", "<string>"]
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
           },
           "-B": {
             "description": "<string>",
@@ -239,7 +266,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -267,7 +296,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -296,7 +327,11 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>", "<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -316,7 +351,10 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -337,7 +375,10 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -400,7 +441,10 @@
                         "type": "<string>"
                       }
                     },
-                    "required": ["<string>", "<string>"],
+                    "required": [
+                      "<string>",
+                      "<string>"
+                    ],
                     "additionalProperties": false
                   }
                 },
@@ -410,7 +454,12 @@
                   "type": "<string>"
                 }
               },
-              "required": ["<string>", "<string>", "<string>", "<string>"],
+              "required": [
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>"
+              ],
               "additionalProperties": false
             }
           },
@@ -436,7 +485,9 @@
             "additionalProperties": false
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -456,7 +507,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -488,7 +541,10 @@
             "additionalProperties": {}
           }
         },
-        "required": ["<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -504,7 +560,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -536,7 +594,11 @@
             "anyOf": [
               {
                 "type": "<string>",
-                "enum": ["<string>", "<string>", "<string>"]
+                "enum": [
+                  "<string>",
+                  "<string>",
+                  "<string>"
+                ]
               },
               {
                 "type": "<string>",
@@ -571,7 +633,9 @@
             "additionalProperties": {}
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -605,7 +669,9 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -627,7 +693,13 @@
         "properties": {
           "type": {
             "type": "<string>",
-            "enum": ["message", "<string>", "<string>", "<string>", "<string>"],
+            "enum": [
+              "message",
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ],
             "description": "<string>"
           },
           "recipient": {
@@ -651,7 +723,9 @@
             "description": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -672,7 +746,10 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       }
     },
@@ -707,7 +784,10 @@
             "type": "<string>"
           }
         },
-        "required": ["<string>", "<string>"],
+        "required": [
+          "<string>",
+          "<string>"
+        ],
         "additionalProperties": false
       },
       "cache_control": {

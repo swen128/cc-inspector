@@ -24,7 +24,13 @@
                 },
                 "type": {
                   "type": "<string>",
-                  "enum": ["<string>", "<string>", "<string>", "<string>", "<string>"],
+                  "enum": [
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "<string>"
+                  ],
                   "description": "<string>"
                 },
                 "ref": {
@@ -36,13 +42,20 @@
                   "description": "<string>"
                 }
               },
-              "required": ["<string>", "<string>", "<string>", "<string>"],
+              "required": [
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>"
+              ],
               "additionalProperties": false
             },
             "description": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "$schema": "<string>",
         "additionalProperties": false
       }

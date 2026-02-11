@@ -22,7 +22,11 @@
                 "properties": {
                   "type": "<string>",
                   "additionalProperties": {
-                    "type": ["<string>", "<string>", "<string>"]
+                    "type": [
+                      "<string>",
+                      "<string>",
+                      "<string>"
+                    ]
                   },
                   "description": "<string>"
                 },
@@ -47,10 +51,14 @@
                   },
                   "type": {
                     "type": "<string>",
-                    "enum": ["<string>"]
+                    "enum": [
+                      "<string>"
+                    ]
                   }
                 },
-                "required": ["<string>"],
+                "required": [
+                  "<string>"
+                ],
                 "additionalProperties": true
               },
               {
@@ -62,10 +70,14 @@
                   },
                   "type": {
                     "type": "<string>",
-                    "enum": ["<string>"]
+                    "enum": [
+                      "<string>"
+                    ]
                   }
                 },
-                "required": ["<string>"],
+                "required": [
+                  "<string>"
+                ],
                 "additionalProperties": true
               },
               {
@@ -77,17 +89,23 @@
                   },
                   "type": {
                     "type": "<string>",
-                    "enum": ["<string>"]
+                    "enum": [
+                      "<string>"
+                    ]
                   }
                 },
-                "required": ["<string>"],
+                "required": [
+                  "<string>"
+                ],
                 "additionalProperties": true
               }
             ],
             "description": "<string>"
           }
         },
-        "required": ["<string>"],
+        "required": [
+          "<string>"
+        ],
         "additionalProperties": false,
         "$schema": "<string>"
       }
