@@ -27,7 +27,6 @@ Usage: run the proxy, then launch Claude Code with `ANTHROPIC_BASE_URL=http://lo
 - **UI components**: shadcn/ui (new-york style) via `bunx shadcn@latest add <component>`. Config in `components.json`.
 - **Styling**: Tailwind CSS v4 via `bun-plugin-tailwind`. Global styles in `styles/globals.css`.
 - **Component stories**: Ladle (`src/**/*.stories.tsx`). Config in `.ladle/config.mjs`.
-- **Path alias**: `@/*` maps to `./src/*` (tsconfig paths).
 - **Validation**: Zod v4.
 
 ## Lint Rules
