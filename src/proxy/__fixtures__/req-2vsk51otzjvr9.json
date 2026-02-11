@@ -1,0 +1,60 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "<string>"
+        }
+      ]
+    }
+  ],
+  "system": [
+    {
+      "type": "text",
+      "text": "<string>"
+    },
+    {
+      "type": "text",
+      "text": "<string>"
+    },
+    {
+      "type": "text",
+      "text": "<string>"
+    }
+  ],
+  "tools": [],
+  "metadata": {
+    "user_id": "<string>"
+  },
+  "max_tokens": 32000,
+  "temperature": 1,
+  "output_config": {
+    "format": {
+      "type": "<string>",
+      "schema": {
+        "type": "<string>",
+        "properties": {
+          "isNewTopic": {
+            "type": "<string>"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "<string>"
+              },
+              {
+                "type": "<string>"
+              }
+            ]
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "stream": true
+}

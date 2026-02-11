@@ -1,0 +1,29 @@
+{
+  "model": "<string>",
+  "id": "<string>",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "text",
+      "text": "<string>"
+    }
+  ],
+  "stop_reason": "<string>",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 0
+    },
+    "output_tokens": 1,
+    "service_tier": "<string>",
+    "inference_geo": "<string>"
+  },
+  "context_management": {
+    "applied_edits": []
+  }
+}

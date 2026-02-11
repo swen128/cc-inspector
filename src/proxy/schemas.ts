@@ -97,6 +97,7 @@ const ToolDefinition = z.object({
 const ThinkingConfig = z.discriminatedUnion("type", [
   z.object({ type: z.literal("enabled"), budget_tokens: z.number() }),
   z.object({ type: z.literal("disabled") }),
+  z.object({ type: z.literal("adaptive") }),
 ]);
 
 export const ClaudeRequestSchema = z.object({

@@ -1,4 +1,4 @@
-import { readdir, mkdir } from "node:fs/promises";
+import { mkdir, readdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const LOGS_DIR = "logs";
@@ -25,6 +25,9 @@ const KEEP_VALUES = new Set([
   "input_json_delta",
   "thinking_delta",
   "signature_delta",
+  "enabled",
+  "disabled",
+  "adaptive",
 ]);
 
 function sanitize(value: unknown): unknown {
