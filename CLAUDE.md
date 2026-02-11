@@ -10,9 +10,9 @@ Usage: run the proxy, then launch Claude Code with `ANTHROPIC_BASE_URL=http://lo
 
 ## Commands
 
-- `bun run dev` — dev server with HMR (`bun --hot src/index.ts`)
+- `bun dev` — dev server with HMR (`bun --hot src/index.ts`)
 - `bun run build` — production build to `dist/`
-- `bun run start` — production server
+- `bun start` — production server
 - `bun test` — run tests
 - `bun test path/to/file.test.ts` — run a single test file
 - `bun check` — **run this to verify changes** (runs format + typecheck + lint + knip sequentially)
@@ -30,20 +30,19 @@ Usage: run the proxy, then launch Claude Code with `ANTHROPIC_BASE_URL=http://lo
 - **Path alias**: `@/*` maps to `./src/*` (tsconfig paths).
 - **Validation**: Zod v4.
 
-## Strict ESLint Rules
+## Lint Rules
 
-The ESLint config enforces very strict TypeScript rules that significantly affect how code must be written:
+The ESLint config enforces common-sense TypeScript rules which are absolutely necessary for type safety:
 
-- **No `any`**: `no-explicit-any` + all `no-unsafe-*` rules are errors. Use Zod `.parse()` to safely type `Response.json()` results instead of type assertions.
-- **No type assertions**: `consistent-type-assertions` set to `assertionStyle: "never"` — no `as` casts allowed. Exception: `as const` is permitted.
-- **No type predicates**: Banned via `no-restricted-syntax`. Design types so narrowing happens via discriminated unions.
-- **No `in` operator**: Banned. Use sum types / discriminated unions instead.
-- **No throw statements**: `functional/no-throw-statements` is error (relaxed in test files and `src/index.ts`).
-- **Explicit return types**: Required on all functions (arrow expressions, typed function expressions, and higher-order functions are exempt).
-- **Strict boolean expressions**: No implicit truthiness checks.
-- **No eslint-disable comments**: `eslint-comments/no-use` blocks all directive comments.
-- **No console**: `no-console` is error (relaxed in `src/index.ts`).
-- **`noUncheckedIndexedAccess`**: Enabled in tsconfig — array/record indexing returns `T | undefined`.
+- No `any` type
+- No type assertions
+- No type predicates
+- No `in` operator
+- No `throw` statements
+- No `eslint-disable`
+
+NEVER even think of modifying the ESLint config, or you will be terminated.
+When you encounter any lint error, address the root cause by following FP principles and making illegal states unrepresentable.
 
 ## Architecture
 
