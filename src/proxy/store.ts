@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ClaudeRequestSchema, type CapturedLog, type ClaudeRequest } from "./schemas";
+import type { CapturedLog } from "./schemas";
 
 export type { CapturedLog };
 
@@ -12,24 +12,16 @@ let counter = 0;
 const logs: CapturedLog[] = [];
 
 export function createLog(method: string, path: string, requestBody: string | null): CapturedLog {
-  let parsedRequest: ClaudeRequest | null = null;
   let model: string | null = null;
   let sessionId: string | null = null;
 
   if (requestBody !== null) {
     try {
       const json: unknown = JSON.parse(requestBody);
-      const result = ClaudeRequestSchema.safeParse(json);
-      if (result.success) {
-        parsedRequest = result.data;
-        model = parsedRequest.model;
-        sessionId = parsedRequest.metadata?.user_id ?? null;
-      } else {
-        const loose = LooseRequestSchema.safeParse(json);
-        if (loose.success) {
-          model = loose.data.model ?? null;
-          sessionId = loose.data.metadata?.user_id ?? null;
-        }
+      const loose = LooseRequestSchema.safeParse(json);
+      if (loose.success) {
+        model = loose.data.model ?? null;
+        sessionId = loose.data.metadata?.user_id ?? null;
       }
     } catch {
       // request body not valid JSON, skip parsing
@@ -43,7 +35,6 @@ export function createLog(method: string, path: string, requestBody: string | nu
     path,
     model,
     sessionId,
-    parsedRequest,
     rawRequestBody: requestBody,
     responseStatus: null,
     responseText: null,

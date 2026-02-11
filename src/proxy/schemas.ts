@@ -209,7 +209,6 @@ export const CapturedLogSchema = z.object({
   path: z.string(),
   model: z.string().nullable(),
   sessionId: z.string().nullable(),
-  parsedRequest: ClaudeRequestSchema.nullable(),
   rawRequestBody: z.string().nullable(),
   responseStatus: z.number().nullable(),
   responseText: z.string().nullable(),
@@ -219,7 +218,23 @@ export const CapturedLogSchema = z.object({
   streaming: z.boolean(),
 });
 
+export function parseRequest(rawBody: string | null): ClaudeRequest | null {
+  if (rawBody === null) return null;
+  try {
+    const json: unknown = JSON.parse(rawBody);
+    const result = ClaudeRequestSchema.safeParse(json);
+    if (result.success) return result.data;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export type ClaudeRequest = z.infer<typeof ClaudeRequestSchema>;
+export type ClaudeResponse = z.infer<typeof ClaudeResponseSchema>;
 export type CapturedLog = z.infer<typeof CapturedLogSchema>;
 export type ContentBlockType = z.infer<typeof ContentBlock>;
+export type ResponseContentBlockType = z.infer<typeof ResponseContentBlock>;
 export type MessageType = z.infer<typeof Message>;
+export type SystemBlockType = z.infer<typeof SystemBlock>;
+export type ToolDefinitionType = z.infer<typeof ToolDefinition>;

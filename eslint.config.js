@@ -74,15 +74,6 @@ export default [
       "functional/no-throw-statements": "error",
       "@typescript-eslint/no-non-null-assertion": "error",
       "@typescript-eslint/strict-boolean-expressions": "error",
-      "@typescript-eslint/explicit-function-return-type": [
-        "error",
-        {
-          allowExpressions: true,
-          allowTypedFunctionExpressions: true,
-          allowHigherOrderFunctions: true,
-          allowConciseArrowFunctionExpressionsStartingWithVoid: true,
-        },
-      ],
       "@typescript-eslint/no-floating-promises": "error",
       "@typescript-eslint/await-thenable": "error",
       "@typescript-eslint/no-misused-promises": "error",
