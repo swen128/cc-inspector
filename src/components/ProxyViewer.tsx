@@ -421,7 +421,7 @@ export function ProxyViewer({
           <div className="text-center text-muted-foreground py-16">
             No requests captured yet. Configure Claude Code with:
             <pre className="mt-4 text-blue-500 font-mono">
-              ANTHROPIC_BASE_URL=http://localhost:3000/proxy claude
+              ANTHROPIC_BASE_URL=http://localhost:25947/proxy claude
             </pre>
           </div>
         ) : (

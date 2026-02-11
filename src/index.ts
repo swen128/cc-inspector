@@ -4,6 +4,7 @@ import { handleProxy } from "./proxy/handler";
 import { getFilteredLogs, getSessions, getModels } from "./proxy/store";
 
 const server = serve({
+  port: 25947,
   routes: {
     "/api/hello": {
       GET(_req) {

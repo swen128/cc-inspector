@@ -14,10 +14,10 @@ bun run dev
 Then launch Claude Code through the proxy:
 
 ```bash
-ANTHROPIC_BASE_URL=http://localhost:3000/proxy claude
+ANTHROPIC_BASE_URL=http://localhost:25947/proxy claude
 ```
 
-Open http://localhost:3000 to see captured requests in real time.
+Open http://localhost:25947 to see captured requests in real time.
 
 ## What You Can See
 
@@ -33,9 +33,9 @@ Open http://localhost:3000 to see captured requests in real time.
 The proxy sits between Claude Code and `api.anthropic.com`. Setting `ANTHROPIC_BASE_URL` tells Claude Code to send API requests to the proxy instead of directly to Anthropic. The proxy forwards everything to the real API and logs both the request and response.
 
 ```
-Claude Code  →  cc-proxy (:3000/proxy/*)  →  api.anthropic.com
+Claude Code  →  cc-proxy (:25947/proxy/*)  →  api.anthropic.com
                     ↓
-              Web UI (:3000)
+              Web UI (:25947)
 ```
 
 Logs are stored in memory only and reset when the server restarts.
