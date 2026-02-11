@@ -13,7 +13,9 @@
     "format:check": "biome format .",
     "knip": "knip",
     "check": "bun format && bun typecheck && bun lint && bun knip",
-    "prepare": "husky"
+    "prepare": "husky",
+    "ladle": "ladle serve",
+    "ladle:build": "ladle build"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
@@ -30,6 +32,8 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
     "@eslint/js": "^10.0.1",
+    "@ladle/react": "^5.1.1",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/bun": "latest",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -4,7 +4,12 @@
   "entry": ["src/frontend.tsx"],
   "project": ["src/**/*.{ts,tsx}"],
   "ignore": ["**/*.spec.ts", "**/*.test.ts"],
-  "ignoreDependencies": ["tailwindcss", "tw-animate-css", "@tailwindcss/typography"],
+  "ignoreDependencies": [
+    "tailwindcss",
+    "tw-animate-css",
+    "@tailwindcss/typography",
+    "@tailwindcss/vite"
+  ],
   "eslint": {
     "config": ["eslint.config.js"]
   },
