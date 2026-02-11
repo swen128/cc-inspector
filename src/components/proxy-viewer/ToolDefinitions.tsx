@@ -3,8 +3,8 @@ import { type JSX, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { JsonViewer, safeJsonValue } from "@/components/ui/json-viewer";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
 import type { ToolDefinitionType } from "../../proxy/schemas";
 
 function truncateDescription(description: string, max: number): string {
@@ -34,13 +34,7 @@ function ToolItem({ tool }: { tool: ToolDefinitionType }): JSX.Element {
           )}
           {tool.input_schema !== undefined && (
             <ScrollArea className="max-h-[40vh]">
-              <pre
-                className={cn(
-                  "font-mono text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed",
-                )}
-              >
-                {JSON.stringify(tool.input_schema, null, 2)}
-              </pre>
+              <JsonViewer data={safeJsonValue(tool.input_schema)} defaultExpandDepth={1} />
             </ScrollArea>
           )}
         </div>

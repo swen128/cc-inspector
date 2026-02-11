@@ -1,19 +1,12 @@
 import type { JSX } from "react";
 import { useMemo, useState } from "react";
+import { JsonViewerFromString } from "@/components/ui/json-viewer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { type CapturedLog, parseRequest } from "@/proxy/schemas";
 import { LogEntryHeader } from "./LogEntryHeader";
 import { RequestView } from "./RequestView";
 import { ResponseView } from "./ResponseView";
-
-function prettifyJson(text: string): string {
-  try {
-    return JSON.stringify(JSON.parse(text), null, 2);
-  } catch {
-    return text;
-  }
-}
 
 export type LogEntryProps = {
   log: CapturedLog;
@@ -78,19 +71,19 @@ export function LogEntry({ log }: LogEntryProps): JSX.Element {
               <div className="px-4 py-3 space-y-4">
                 <div>
                   <h4 className="text-xs font-medium text-muted-foreground mb-1.5">Request</h4>
-                  <pre className="font-mono text-xs whitespace-pre-wrap break-words">
-                    {log.rawRequestBody !== null
-                      ? prettifyJson(log.rawRequestBody)
-                      : "No request body"}
-                  </pre>
+                  {log.rawRequestBody !== null ? (
+                    <JsonViewerFromString text={log.rawRequestBody} defaultExpandDepth={1} />
+                  ) : (
+                    <p className="text-xs text-muted-foreground italic">No request body</p>
+                  )}
                 </div>
                 <div>
                   <h4 className="text-xs font-medium text-muted-foreground mb-1.5">Response</h4>
-                  <pre className="font-mono text-xs whitespace-pre-wrap break-words">
-                    {log.responseText !== null
-                      ? prettifyJson(log.responseText)
-                      : "No response body"}
-                  </pre>
+                  {log.responseText !== null ? (
+                    <JsonViewerFromString text={log.responseText} defaultExpandDepth={1} />
+                  ) : (
+                    <p className="text-xs text-muted-foreground italic">No response body</p>
+                  )}
                 </div>
               </div>
             </TabsContent>

@@ -11,6 +11,7 @@ import { type JSX, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { JsonViewer, safeJsonValue } from "@/components/ui/json-viewer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import type { ContentBlockType, ResponseContentBlockType } from "../../proxy/schemas";
@@ -120,9 +121,7 @@ export function ToolUseBlock({
         <CollapsibleContent>
           <div className="px-3 pb-2">
             <ScrollArea className="max-h-[60vh]">
-              <pre className="text-xs text-muted-foreground whitespace-pre-wrap font-mono leading-relaxed">
-                {JSON.stringify(input, null, 2)}
-              </pre>
+              <JsonViewer data={safeJsonValue(input)} defaultExpandDepth={2} />
             </ScrollArea>
           </div>
         </CollapsibleContent>
