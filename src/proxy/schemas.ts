@@ -1,9 +1,28 @@
 import { z } from "zod";
 
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
+const JsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.null(),
+    z.array(JsonValueSchema),
+    z.record(z.string(), JsonValueSchema),
+  ]),
+);
+
+const CacheControl = z.object({
+  type: z.string(),
+  ttl: z.string(),
+  scope: z.string().optional(),
+});
+
 const TextContentBlock = z.object({
   type: z.literal("text"),
   text: z.string(),
-  cache_control: z.unknown().optional(),
+  cache_control: CacheControl.optional(),
 });
 
 const ThinkingContentBlock = z.object({
@@ -13,7 +32,7 @@ const ThinkingContentBlock = z.object({
 });
 
 const ImageSourceBlock = z.object({
-  type: z.literal("base64").optional(),
+  type: z.literal("base64"),
   media_type: z.string(),
   data: z.string(),
 });
@@ -27,13 +46,15 @@ const ToolUseContentBlock = z.object({
   type: z.literal("tool_use"),
   id: z.string(),
   name: z.string(),
-  input: z.record(z.string(), z.unknown()),
+  input: z.record(z.string(), JsonValueSchema),
 });
+
+const ToolResultContentItem = z.discriminatedUnion("type", [TextContentBlock, ImageContentBlock]);
 
 const ToolResultContentBlock = z.object({
   type: z.literal("tool_result"),
   tool_use_id: z.string().optional(),
-  content: z.union([z.string(), z.array(z.unknown())]),
+  content: z.union([z.string(), z.array(ToolResultContentItem)]),
   is_error: z.boolean().optional(),
 });
 
@@ -55,15 +76,28 @@ const Message = z.object({
 const SystemBlock = z.object({
   type: z.literal("text"),
   text: z.string(),
-  cache_control: z.unknown().optional(),
+  cache_control: CacheControl.optional(),
+});
+
+const InputSchema = z.object({
+  type: z.string(),
+  properties: z.record(z.string(), z.record(z.string(), JsonValueSchema)),
+  required: z.array(z.string()).optional(),
+  additionalProperties: z.boolean().optional(),
+  $schema: z.string().optional(),
 });
 
 const ToolDefinition = z.object({
   name: z.string(),
   description: z.string().optional(),
-  input_schema: z.unknown().optional(),
-  cache_control: z.unknown().optional(),
+  input_schema: InputSchema.optional(),
+  cache_control: CacheControl.optional(),
 });
+
+const ThinkingConfig = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("enabled"), budget_tokens: z.number() }),
+  z.object({ type: z.literal("disabled") }),
+]);
 
 export const ClaudeRequestSchema = z.object({
   model: z.string(),
@@ -73,12 +107,11 @@ export const ClaudeRequestSchema = z.object({
   max_tokens: z.number().optional(),
   temperature: z.number().optional(),
   stream: z.boolean().optional(),
-  thinking: z.unknown().optional(),
+  thinking: ThinkingConfig.optional(),
   metadata: z
     .object({
       user_id: z.string().optional(),
     })
-    .passthrough()
     .optional(),
 });
 
