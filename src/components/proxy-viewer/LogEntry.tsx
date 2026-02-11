@@ -1,9 +1,9 @@
 import type { JSX } from "react";
 import { useMemo, useState } from "react";
-import { JsonViewerFromString } from "@/components/ui/json-viewer";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
-import { type CapturedLog, parseRequest } from "@/proxy/schemas";
+import { cn } from "../../lib/utils";
+import { type CapturedLog, parseRequest } from "../../proxy/schemas";
+import { JsonViewerFromString } from "../ui/json-viewer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { LogEntryHeader } from "./LogEntryHeader";
 import { RequestView } from "./RequestView";
 import { ResponseView } from "./ResponseView";

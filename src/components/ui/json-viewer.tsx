@@ -1,8 +1,8 @@
 import { Check, ChevronDown, ChevronRight, Copy } from "lucide-react";
 import { type JSX, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip";
 
 type JsonPrimitive = string | number | boolean | null;
 type JsonValue = JsonPrimitive | ReadonlyArray<JsonValue> | Readonly<{ [key: string]: JsonValue }>;

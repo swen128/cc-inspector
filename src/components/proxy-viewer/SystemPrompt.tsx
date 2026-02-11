@@ -1,10 +1,10 @@
 import { ChevronDown, ChevronRight, FileText } from "lucide-react";
 import { type JSX, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Badge } from "@/components/ui/badge";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import type { SystemBlockType } from "../../proxy/schemas";
+import { Badge } from "../ui/badge";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 
 function formatCharCount(count: number): string {
   if (count < 1000) return `${count} chars`;

@@ -1,8 +1,8 @@
 import { ChevronDown, ChevronRight, Clock, MessageSquare, Radio, Wrench, Zap } from "lucide-react";
 import type { JSX } from "react";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import type { CapturedLog, ClaudeRequest } from "@/proxy/schemas";
+import { cn } from "../../lib/utils";
+import type { CapturedLog, ClaudeRequest } from "../../proxy/schemas";
+import { Badge } from "../ui/badge";
 
 function formatElapsed(ms: number): string {
   if (ms < 1000) return `${ms}ms`;

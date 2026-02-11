@@ -1,11 +1,11 @@
 import { ChevronDown, ChevronRight, Wrench } from "lucide-react";
 import { type JSX, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Badge } from "@/components/ui/badge";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { JsonViewer, safeJsonValue } from "@/components/ui/json-viewer";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import type { ToolDefinitionType } from "../../proxy/schemas";
+import { Badge } from "../ui/badge";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
+import { JsonViewer, safeJsonValue } from "../ui/json-viewer";
+import { ScrollArea } from "../ui/scroll-area";
 
 function truncateDescription(description: string, max: number): string {
   if (description.length <= max) return description;

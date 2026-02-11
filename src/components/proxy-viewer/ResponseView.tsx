@@ -1,10 +1,10 @@
 import { AlertTriangle, StopCircle, Zap } from "lucide-react";
 import type { JSX } from "react";
 import ReactMarkdown from "react-markdown";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { type ClaudeResponse, ClaudeResponseSchema } from "../../proxy/schemas";
+import { Badge } from "../ui/badge";
+import { Separator } from "../ui/separator";
 import { ResponseContentBlockRenderer } from "./content-blocks";
 
 export type ResponseViewProps = {

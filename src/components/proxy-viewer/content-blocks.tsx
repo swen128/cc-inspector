@@ -9,12 +9,12 @@ import {
 } from "lucide-react";
 import { type JSX, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Badge } from "@/components/ui/badge";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { JsonViewer, safeJsonValue } from "@/components/ui/json-viewer";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import type { ContentBlockType, ResponseContentBlockType } from "../../proxy/schemas";
+import { Badge } from "../ui/badge";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
+import { JsonViewer, safeJsonValue } from "../ui/json-viewer";
+import { ScrollArea } from "../ui/scroll-area";
 
 function assertNever(_value: never): JSX.Element {
   return <></>;
