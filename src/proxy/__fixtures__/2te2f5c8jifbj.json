@@ -1,0 +1,73 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "profileUrl": {
+            "type": "<string>",
+            "format": "<string>",
+            "description": "<string>"
+          },
+          "organizationSlug": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "regionUrl": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "description": "<string>"
+              },
+              {
+                "type": "<string>"
+              }
+            ],
+            "description": "<string>",
+            "default": null
+          },
+          "projectSlugOrId": {
+            "type": ["<string>", "<string>"],
+            "description": "<string>"
+          },
+          "transactionName": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "statsPeriod": {
+            "type": "<string>",
+            "default": "<string>",
+            "description": "<string>"
+          },
+          "compareAgainstPeriod": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "focusOnUserCode": {
+            "type": "<string>",
+            "default": true,
+            "description": "<string>"
+          },
+          "maxHotPaths": {
+            "type": "<string>",
+            "minimum": 1,
+            "maximum": 20,
+            "default": 10,
+            "description": "<string>"
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ]
+}

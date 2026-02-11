@@ -1,0 +1,45 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "type": {
+            "default": "<string>",
+            "description": "<string>",
+            "type": "<string>",
+            "enum": ["<string>", "<string>"]
+          },
+          "filename": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "element": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "ref": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "fullPage": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    }
+  ]
+}

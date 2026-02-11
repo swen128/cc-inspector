@@ -1,0 +1,35 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "description": "<string>"
+              },
+              {
+                "type": "<string>"
+              }
+            ],
+            "description": "<string>",
+            "default": null
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ]
+}

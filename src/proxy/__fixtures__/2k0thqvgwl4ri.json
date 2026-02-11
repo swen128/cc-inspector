@@ -1,0 +1,65 @@
+{
+  "model": "<string>",
+  "max_tokens": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "organizationSlug": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "projectSlug": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "eventId": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "attachmentId": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "description": "<string>"
+              },
+              {
+                "type": "<string>"
+              }
+            ],
+            "description": "<string>",
+            "default": null
+          },
+          "regionUrl": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "description": "<string>"
+              },
+              {
+                "type": "<string>"
+              }
+            ],
+            "description": "<string>",
+            "default": null
+          }
+        },
+        "required": ["<string>", "<string>", "<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  }
+}

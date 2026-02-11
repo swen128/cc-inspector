@@ -1,0 +1,31 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "libraryId": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ]
+}

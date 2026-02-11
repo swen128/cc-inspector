@@ -1,0 +1,45 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "organizationSlug": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "regionUrl": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "description": "<string>"
+              },
+              {
+                "type": "<string>"
+              }
+            ],
+            "description": "<string>",
+            "default": null
+          },
+          "traceId": {
+            "type": "<string>",
+            "pattern": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ]
+}

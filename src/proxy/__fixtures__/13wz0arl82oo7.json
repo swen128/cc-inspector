@@ -1,0 +1,70 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "organizationSlug": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "naturalLanguageQuery": {
+            "type": "<string>",
+            "minLength": 1,
+            "description": "<string>"
+          },
+          "projectSlug": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "description": "<string>"
+              },
+              {
+                "type": "<string>"
+              }
+            ],
+            "description": "<string>",
+            "default": null
+          },
+          "regionUrl": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "description": "<string>"
+              },
+              {
+                "type": "<string>"
+              }
+            ],
+            "description": "<string>",
+            "default": null
+          },
+          "limit": {
+            "type": "<string>",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 10,
+            "description": "<string>"
+          },
+          "includeExplanation": {
+            "type": "<string>",
+            "default": false,
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ]
+}

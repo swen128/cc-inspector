@@ -1,0 +1,39 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "startElement": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "startRef": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "endElement": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "endRef": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>", "<string>", "<string>"],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    }
+  ]
+}

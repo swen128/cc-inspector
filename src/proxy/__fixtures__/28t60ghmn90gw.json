@@ -1,0 +1,34 @@
+{
+  "model": "<string>",
+  "max_tokens": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_transcript": {
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  }
+}

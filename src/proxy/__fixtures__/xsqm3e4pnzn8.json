@@ -1,0 +1,55 @@
+{
+  "model": "<string>",
+  "max_tokens": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "fields": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>",
+              "properties": {
+                "name": {
+                  "type": "<string>",
+                  "description": "<string>"
+                },
+                "type": {
+                  "type": "<string>",
+                  "enum": ["<string>", "<string>", "<string>", "<string>", "<string>"],
+                  "description": "<string>"
+                },
+                "ref": {
+                  "type": "<string>",
+                  "description": "<string>"
+                },
+                "value": {
+                  "type": "<string>",
+                  "description": "<string>"
+                }
+              },
+              "required": ["<string>", "<string>", "<string>", "<string>"],
+              "additionalProperties": false
+            },
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  }
+}

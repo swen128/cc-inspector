@@ -1,0 +1,13 @@
+{
+  "model": "<string>",
+  "max_tokens": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "model": "<string>",
+  "max_tokens": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "minLength": 1,
+            "description": "<string>"
+          },
+          "query_type": {
+            "type": "<string>",
+            "enum": ["<string>", "user"]
+          },
+          "content_search_mode": {
+            "type": "<string>",
+            "enum": ["<string>", "<string>"]
+          },
+          "data_source_url": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "page_url": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "teamspace_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "filters": {
+            "type": "<string>",
+            "properties": {
+              "created_date_range": {
+                "type": "<string>",
+                "properties": {
+                  "start_date": {
+                    "type": "<string>",
+                    "format": "<string>",
+                    "description": "<string>"
+                  },
+                  "end_date": {
+                    "type": "<string>",
+                    "format": "<string>",
+                    "description": "<string>"
+                  }
+                },
+                "additionalProperties": true,
+                "description": "<string>"
+              },
+              "created_by_user_ids": {
+                "type": "<string>",
+                "items": {
+                  "type": "<string>"
+                },
+                "maxItems": 100,
+                "description": "<string>"
+              }
+            },
+            "additionalProperties": true,
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  }
+}

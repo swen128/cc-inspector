@@ -1,0 +1,57 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "matchCase": {
+            "type": "<string>",
+            "description": "<string>",
+            "default": false
+          },
+          "matchWholeWords": {
+            "type": "<string>",
+            "description": "<string>",
+            "default": false
+          },
+          "useRegexp": {
+            "type": "<string>",
+            "description": "<string>",
+            "default": false
+          },
+          "repo": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "path": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "language": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ]
+}

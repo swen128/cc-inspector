@@ -1,0 +1,32 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "action": {
+            "type": "<string>",
+            "enum": ["<string>", "<string>", "<string>", "<string>"],
+            "description": "<string>"
+          },
+          "index": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    }
+  ]
+}

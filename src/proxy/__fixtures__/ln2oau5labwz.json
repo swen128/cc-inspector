@@ -1,0 +1,34 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "tokensNum": {
+            "type": "<string>",
+            "minimum": 1000,
+            "maximum": 50000,
+            "default": 5000,
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ]
+}

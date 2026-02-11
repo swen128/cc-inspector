@@ -1,0 +1,49 @@
+{
+  "model": "<string>",
+  "max_tokens": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "numResults": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "livecrawl": {
+            "type": "<string>",
+            "enum": ["<string>", "<string>"],
+            "description": "<string>"
+          },
+          "type": {
+            "type": "<string>",
+            "enum": ["<string>", "<string>"],
+            "description": "<string>"
+          },
+          "contextMaxCharacters": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  }
+}

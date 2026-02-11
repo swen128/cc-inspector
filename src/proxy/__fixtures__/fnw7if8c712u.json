@@ -1,0 +1,615 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "prompt": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "subagent_type": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "model": {
+            "description": "<string>",
+            "type": "<string>",
+            "enum": ["<string>", "<string>", "<string>"]
+          },
+          "resume": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "run_in_background": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "max_turns": {
+            "description": "<string>",
+            "type": "<string>",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": ["<string>", "<string>", "<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "task_id": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "block": {
+            "description": "<string>",
+            "default": true,
+            "type": "<string>"
+          },
+          "timeout": {
+            "description": "<string>",
+            "default": 30000,
+            "type": "<string>",
+            "minimum": 0,
+            "maximum": 600000
+          }
+        },
+        "required": ["<string>", "<string>", "<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "command": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "timeout": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "run_in_background": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "dangerouslyDisableSandbox": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "_simulatedSedEdit": {
+            "description": "<string>",
+            "type": "<string>",
+            "properties": {
+              "filePath": {
+                "type": "<string>"
+              },
+              "newContent": {
+                "type": "<string>"
+              }
+            },
+            "required": ["<string>", "<string>"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "pattern": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "path": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "pattern": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "path": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "glob": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "output_mode": {
+            "description": "<string>",
+            "type": "<string>",
+            "enum": ["<string>", "<string>", "<string>"]
+          },
+          "-B": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "-A": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "-C": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "context": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "-n": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "-i": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "type": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "head_limit": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "offset": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "multiline": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "file_path": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "offset": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "limit": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "pages": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "file_path": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "old_string": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "new_string": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "replace_all": {
+            "description": "<string>",
+            "default": false,
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>", "<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "file_path": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "content": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "url": {
+            "description": "<string>",
+            "type": "<string>",
+            "format": "<string>"
+          },
+          "prompt": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "task_id": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "shell_id": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "questions": {
+            "description": "<string>",
+            "minItems": 1,
+            "maxItems": 4,
+            "type": "<string>",
+            "items": {
+              "type": "<string>",
+              "properties": {
+                "question": {
+                  "description": "<string>",
+                  "type": "<string>"
+                },
+                "header": {
+                  "description": "<string>",
+                  "type": "<string>"
+                },
+                "options": {
+                  "description": "<string>",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "type": "<string>",
+                  "items": {
+                    "type": "<string>",
+                    "properties": {
+                      "label": {
+                        "description": "<string>",
+                        "type": "<string>"
+                      },
+                      "description": {
+                        "description": "<string>",
+                        "type": "<string>"
+                      }
+                    },
+                    "required": ["<string>", "<string>"],
+                    "additionalProperties": false
+                  }
+                },
+                "multiSelect": {
+                  "description": "<string>",
+                  "default": false,
+                  "type": "<string>"
+                }
+              },
+              "required": ["<string>", "<string>", "<string>", "<string>"],
+              "additionalProperties": false
+            }
+          },
+          "answers": {
+            "description": "<string>",
+            "type": "<string>",
+            "propertyNames": {
+              "type": "<string>"
+            },
+            "additionalProperties": {
+              "type": "<string>"
+            }
+          },
+          "metadata": {
+            "description": "<string>",
+            "type": "<string>",
+            "properties": {
+              "source": {
+                "description": "<string>",
+                "type": "<string>"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "skill": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "args": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "subject": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "activeForm": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "metadata": {
+            "description": "<string>",
+            "type": "<string>",
+            "propertyNames": {
+              "type": "<string>"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "taskId": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "taskId": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "subject": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "activeForm": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "status": {
+            "description": "<string>",
+            "anyOf": [
+              {
+                "type": "<string>",
+                "enum": ["<string>", "<string>", "<string>"]
+              },
+              {
+                "type": "<string>",
+                "const": "<string>"
+              }
+            ]
+          },
+          "addBlocks": {
+            "description": "<string>",
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            }
+          },
+          "addBlockedBy": {
+            "description": "<string>",
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            }
+          },
+          "owner": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "metadata": {
+            "description": "<string>",
+            "type": "<string>",
+            "propertyNames": {
+              "type": "<string>"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": ["<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "max_results": {
+            "description": "<string>",
+            "default": 5,
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "server": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "server": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "uri": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

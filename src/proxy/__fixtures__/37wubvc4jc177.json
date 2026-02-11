@@ -1,0 +1,31 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "width": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "height": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    }
+  ]
+}

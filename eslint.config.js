@@ -48,6 +48,7 @@ export default [
         MouseEvent: "readonly",
         KeyboardEvent: "readonly",
         React: "readonly",
+        Bun: "readonly",
       },
     },
     plugins: {

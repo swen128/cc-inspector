@@ -1,0 +1,35 @@
+{
+  "model": "<string>",
+  "max_tokens": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "libraryId": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  }
+}

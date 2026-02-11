@@ -1,0 +1,97 @@
+{
+  "model": "<string>",
+  "max_tokens": 1,
+  "messages": [
+    {
+      "role": "user",
+      "content": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "page_or_database_ids": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "minItems": 1,
+            "maxItems": 100,
+            "description": "<string>"
+          },
+          "new_parent": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "properties": {
+                  "page_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": ["<string>"]
+                  }
+                },
+                "required": ["<string>"],
+                "additionalProperties": true
+              },
+              {
+                "type": "<string>",
+                "properties": {
+                  "database_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": ["<string>"]
+                  }
+                },
+                "required": ["<string>"],
+                "additionalProperties": true
+              },
+              {
+                "type": "<string>",
+                "properties": {
+                  "data_source_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": ["<string>"]
+                  }
+                },
+                "required": ["<string>"],
+                "additionalProperties": true
+              },
+              {
+                "type": "<string>",
+                "properties": {
+                  "type": {
+                    "type": "<string>",
+                    "enum": ["<string>"]
+                  }
+                },
+                "required": ["<string>"],
+                "additionalProperties": true
+              }
+            ],
+            "description": "<string>"
+          }
+        },
+        "required": ["<string>", "<string>"],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  }
+}
