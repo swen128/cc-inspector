@@ -1,6 +1,6 @@
 {
   "name": "cc-inspector",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "type": "module",
   "description": "Transparent proxy for the Anthropic Claude API that captures and displays requests/responses in a web UI",
   "license": "MIT",
@@ -24,7 +24,8 @@
     "!src/**/*.test.ts",
     "!src/**/*.stories.tsx",
     "!src/**/__fixtures__",
-    "styles"
+    "styles",
+    "bunfig.toml"
   ],
   "scripts": {
     "dev": "bun --hot src/index.ts",
