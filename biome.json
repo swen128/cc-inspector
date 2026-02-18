@@ -39,7 +39,8 @@
       "!src/proxy/__fixtures__/**",
       "!.output/**",
       "!.nitro/**",
-      "!dist/**"
+      "!dist/**",
+      "!src/routeTree.gen.ts"
     ],
     "ignoreUnknown": false
   }
