@@ -115,13 +115,26 @@ export default [
     },
   },
   {
-    files: ["src/index.ts"],
+    files: ["src/cli.ts"],
     rules: {
       "no-console": "off",
       "functional/no-throw-statements": "off",
     },
   },
   {
-    ignores: ["node_modules/", "dist/", "*.config.js", "src/frontend.tsx"],
+    files: ["src/router.tsx"],
+    rules: {
+      "@typescript-eslint/consistent-type-definitions": "off",
+    },
+  },
+  {
+    ignores: [
+      "node_modules/",
+      "dist/",
+      ".output/",
+      ".nitro/",
+      "*.config.js",
+      "src/routeTree.gen.ts",
+    ],
   },
 ];

@@ -1,15 +1,10 @@
 {
   "$schema": "https://unpkg.com/knip@latest/schema.json",
   "ignoreExportsUsedInFile": true,
-  "entry": ["src/frontend.tsx"],
+  "entry": ["src/routes/**/*.{ts,tsx}", "src/router.tsx"],
   "project": ["src/**/*.{ts,tsx}"],
-  "ignore": ["**/*.spec.ts", "**/*.test.ts"],
-  "ignoreDependencies": [
-    "tailwindcss",
-    "tw-animate-css",
-    "@tailwindcss/typography",
-    "@tailwindcss/vite"
-  ],
+  "ignore": ["**/*.spec.ts", "**/*.test.ts", "src/routeTree.gen.ts"],
+  "ignoreDependencies": ["tailwindcss", "tw-animate-css", "@tailwindcss/typography"],
   "eslint": {
     "config": ["eslint.config.js"]
   },

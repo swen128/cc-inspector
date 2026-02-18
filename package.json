@@ -17,20 +17,22 @@
     "debugging"
   ],
   "bin": {
-    "cc-inspector": "src/index.ts"
+    "cc-inspector": "src/cli.ts"
   },
   "files": [
     "src",
     "!src/**/*.test.ts",
     "!src/**/*.stories.tsx",
     "!src/**/__fixtures__",
+    "!src/routeTree.gen.ts",
     "styles",
-    "bunfig.toml"
+    ".output"
   ],
   "scripts": {
-    "dev": "bun --hot src/index.ts",
-    "start": "NODE_ENV=production bun src/index.ts",
-    "build": "bun run build.ts",
+    "dev": "vite dev",
+    "start": "bun src/cli.ts",
+    "build": "vite build",
+    "prepublishOnly": "bun run build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "biome format --write .",
@@ -44,7 +46,8 @@
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
     "@tailwindcss/typography": "^0.5.19",
-    "bun-plugin-tailwind": "^0.1.2",
+    "@tanstack/react-router": "^1.160.2",
+    "@tanstack/react-start": "^1.161.0",
     "class-variance-authority": "^0.7.1",
     "cleye": "^2.2.1",
     "clsx": "^2.1.1",
@@ -67,13 +70,17 @@
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.55.0",
     "@typescript-eslint/parser": "^8.55.0",
+    "@vitejs/plugin-react": "^5.1.4",
     "eslint": "^9.32.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-functional": "^9.0.2",
     "eslint-plugin-unicorn": "^63.0.0",
     "husky": "^9.1.7",
     "knip": "^5.83.1",
+    "nitro": "^3.0.1-20260217-092337-b28fa21a",
     "tailwindcss": "^4.1.11",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-tsconfig-paths": "^6.1.1"
   }
 }

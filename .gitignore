@@ -4,7 +4,12 @@ node_modules
 # output
 out
 dist
+.output
+.nitro
 *.tgz
+
+# generated
+src/routeTree.gen.ts
 
 # code coverage
 coverage

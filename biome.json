@@ -34,7 +34,13 @@
     }
   },
   "files": {
-    "includes": ["**/*.{ts,tsx,js,jsx,json,jsonc}", "!src/proxy/__fixtures__/**"],
+    "includes": [
+      "**/*.{ts,tsx,js,jsx,json,jsonc}",
+      "!src/proxy/__fixtures__/**",
+      "!.output/**",
+      "!.nitro/**",
+      "!dist/**"
+    ],
     "ignoreUnknown": false
   }
 }
