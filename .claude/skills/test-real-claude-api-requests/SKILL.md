@@ -18,7 +18,7 @@ Capture live Claude Code traffic through the cc-proxy, sanitize it, and run sche
 
 2. Run a Claude Code session routed through the proxy to generate multi-turn traffic (tool_use, tool_result, system blocks, streaming):
    ```bash
-   ANTHROPIC_BASE_URL=http://localhost:25947/proxy claude --print --model claude-haiku-4-5-20251001 "Read the file package.json and tell me the project name."
+   ANTHROPIC_BASE_URL=http://localhost:25947/proxy CLAUDECODE= claude --print --model claude-haiku-4-5-20251001 "Read the file package.json and tell me the project name."
    ```
 
 3. Save captured logs from the in-memory store to `logs/` in the standard format:
