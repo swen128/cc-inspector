@@ -1,0 +1,3589 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "<string>"
+        },
+        {
+          "type": "text",
+          "text": "<string>"
+        },
+        {
+          "type": "text",
+          "text": "<string>"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "<string>",
+          "signature": "<string>"
+        },
+        {
+          "type": "tool_use",
+          "id": "<string>",
+          "name": "<string>",
+          "input": {
+            "file_path": "<string>"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "<string>",
+          "type": "tool_result",
+          "content": "<string>",
+          "cache_control": {
+            "type": "<string>",
+            "ttl": "<string>"
+          }
+        }
+      ]
+    }
+  ],
+  "system": [
+    {
+      "type": "text",
+      "text": "<string>"
+    },
+    {
+      "type": "text",
+      "text": "<string>",
+      "cache_control": {
+        "type": "<string>",
+        "ttl": "<string>"
+      }
+    },
+    {
+      "type": "text",
+      "text": "<string>",
+      "cache_control": {
+        "type": "<string>",
+        "ttl": "<string>"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "prompt": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "subagent_type": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "resume": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "run_in_background": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "name": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "team_name": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "mode": {
+            "description": "<string>",
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
+          },
+          "isolation": {
+            "description": "<string>",
+            "type": "<string>",
+            "enum": [
+              "<string>"
+            ]
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "task_id": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "block": {
+            "description": "<string>",
+            "default": true,
+            "type": "<string>"
+          },
+          "timeout": {
+            "description": "<string>",
+            "default": 30000,
+            "type": "<string>",
+            "minimum": 0,
+            "maximum": 600000
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "command": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "timeout": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "run_in_background": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "dangerouslyDisableSandbox": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "pattern": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "path": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "pattern": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "path": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "glob": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "output_mode": {
+            "description": "<string>",
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
+          },
+          "-B": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "-A": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "-C": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "context": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "-n": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "-i": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "type": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "head_limit": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "offset": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "multiline": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "file_path": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "offset": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "limit": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "pages": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "file_path": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "old_string": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "new_string": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "replace_all": {
+            "description": "<string>",
+            "default": false,
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "file_path": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "content": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "url": {
+            "description": "<string>",
+            "type": "<string>",
+            "format": "<string>"
+          },
+          "prompt": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "task_id": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "shell_id": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "questions": {
+            "description": "<string>",
+            "minItems": 1,
+            "maxItems": 4,
+            "type": "<string>",
+            "items": {
+              "type": "<string>",
+              "properties": {
+                "question": {
+                  "description": "<string>",
+                  "type": "<string>"
+                },
+                "header": {
+                  "description": "<string>",
+                  "type": "<string>"
+                },
+                "options": {
+                  "description": "<string>",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "type": "<string>",
+                  "items": {
+                    "type": "<string>",
+                    "properties": {
+                      "label": {
+                        "description": "<string>",
+                        "type": "<string>"
+                      },
+                      "description": {
+                        "description": "<string>",
+                        "type": "<string>"
+                      },
+                      "preview": {
+                        "description": "<string>",
+                        "type": "<string>"
+                      }
+                    },
+                    "required": [
+                      "<string>",
+                      "<string>"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "multiSelect": {
+                  "description": "<string>",
+                  "default": false,
+                  "type": "<string>"
+                }
+              },
+              "required": [
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "answers": {
+            "description": "<string>",
+            "type": "<string>",
+            "propertyNames": {
+              "type": "<string>"
+            },
+            "additionalProperties": {
+              "type": "<string>"
+            }
+          },
+          "annotations": {
+            "description": "<string>",
+            "type": "<string>",
+            "propertyNames": {
+              "type": "<string>"
+            },
+            "additionalProperties": {
+              "type": "<string>",
+              "properties": {
+                "preview": {
+                  "description": "<string>",
+                  "type": "<string>"
+                },
+                "notes": {
+                  "description": "<string>",
+                  "type": "<string>"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "metadata": {
+            "description": "<string>",
+            "type": "<string>",
+            "properties": {
+              "source": {
+                "description": "<string>",
+                "type": "<string>"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "skill": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "args": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "subject": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "activeForm": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "metadata": {
+            "description": "<string>",
+            "type": "<string>",
+            "propertyNames": {
+              "type": "<string>"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "taskId": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "taskId": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "subject": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "activeForm": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "status": {
+            "description": "<string>",
+            "anyOf": [
+              {
+                "type": "<string>",
+                "enum": [
+                  "<string>",
+                  "<string>",
+                  "<string>"
+                ]
+              },
+              {
+                "type": "<string>",
+                "const": "<string>"
+              }
+            ]
+          },
+          "addBlocks": {
+            "description": "<string>",
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            }
+          },
+          "addBlockedBy": {
+            "description": "<string>",
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            }
+          },
+          "owner": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "metadata": {
+            "description": "<string>",
+            "type": "<string>",
+            "propertyNames": {
+              "type": "<string>"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "name": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "team_name": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "description": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "agent_type": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "type": {
+            "type": "<string>",
+            "enum": [
+              "message",
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ],
+            "description": "<string>"
+          },
+          "recipient": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "content": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "summary": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "request_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "approve": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "cron": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "prompt": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "recurring": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "id": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "operations": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "includePathGeometry": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "nodeIds": {
+            "description": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "type": "<string>"
+          },
+          "parentId": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "patterns": {
+            "description": "<string>",
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "description": "<string>",
+                  "type": "<string>"
+                },
+                "reusable": {
+                  "description": "<string>",
+                  "type": "<string>"
+                },
+                "type": {
+                  "description": "<string>",
+                  "enum": [
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "text",
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "image",
+                    "<string>"
+                  ],
+                  "type": "<string>"
+                }
+              },
+              "type": "<string>"
+            },
+            "type": "<string>"
+          },
+          "readDepth": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "resolveInstances": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "resolveVariables": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "searchDepth": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "direction": {
+            "description": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ],
+            "type": "<string>"
+          },
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "height": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "nodeId": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "padding": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "width": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>",
+          "<string>",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "include_schema": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "topic": {
+            "description": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ],
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "nodeId": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "name": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "tags": {
+            "description": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "type": "<string>"
+          }
+        }
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePathOrTemplate": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "parents": {
+            "description": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "type": "<string>"
+          },
+          "properties": {
+            "description": "<string>",
+            "properties": {
+              "cornerRadius": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "items": {
+                        "type": "<string>"
+                      },
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "items": {
+                        "type": "<string>"
+                      },
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "fillColor": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "fontFamily": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "fontSize": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "fontWeight": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "gap": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "padding": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "strokeColor": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "strokeThickness": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              },
+              "textColor": {
+                "items": {
+                  "properties": {
+                    "from": {
+                      "type": "<string>"
+                    },
+                    "to": {
+                      "type": "<string>"
+                    }
+                  },
+                  "type": "<string>"
+                },
+                "type": "<string>"
+              }
+            },
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "parents": {
+            "description": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "type": "<string>"
+          },
+          "properties": {
+            "description": "<string>",
+            "items": {
+              "enum": [
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>"
+              ],
+              "type": "<string>"
+            },
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "replace": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "variables": {
+            "description": "<string>",
+            "properties": {},
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filePath": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "maxDepth": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "parentId": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "problemsOnly": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "numResults": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "livecrawl": {
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>"
+            ],
+            "description": "<string>"
+          },
+          "type": {
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>"
+            ],
+            "description": "<string>"
+          },
+          "category": {
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>"
+            ],
+            "description": "<string>"
+          },
+          "contextMaxCharacters": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "tokensNum": {
+            "type": "<string>",
+            "minimum": 1000,
+            "maximum": 50000,
+            "default": 5000,
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "server": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "$schema": "<string>",
+        "type": "<string>",
+        "properties": {
+          "server": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "uri": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "matchCase": {
+            "type": "<string>",
+            "description": "<string>",
+            "default": false
+          },
+          "matchWholeWords": {
+            "type": "<string>",
+            "description": "<string>",
+            "default": false
+          },
+          "useRegexp": {
+            "type": "<string>",
+            "description": "<string>",
+            "default": false
+          },
+          "repo": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "path": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "language": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {},
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "width": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "height": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "level": {
+            "default": "<string>",
+            "description": "<string>",
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
+          },
+          "filename": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "accept": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "promptText": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "function": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "element": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "ref": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "paths": {
+            "description": "<string>",
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            }
+          }
+        },
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "fields": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>",
+              "properties": {
+                "name": {
+                  "type": "<string>",
+                  "description": "<string>"
+                },
+                "type": {
+                  "type": "<string>",
+                  "enum": [
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "<string>",
+                    "<string>"
+                  ],
+                  "description": "<string>"
+                },
+                "ref": {
+                  "type": "<string>",
+                  "description": "<string>"
+                },
+                "value": {
+                  "type": "<string>",
+                  "description": "<string>"
+                }
+              },
+              "required": [
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>"
+              ],
+              "additionalProperties": false
+            },
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {},
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "key": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "element": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "ref": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "text": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "submit": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "slowly": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "text"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "url": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {},
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "includeStatic": {
+            "default": false,
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "filename": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "code": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "type": {
+            "default": "<string>",
+            "description": "<string>",
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>"
+            ]
+          },
+          "filename": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "element": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "ref": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "fullPage": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "filename": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "element": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "ref": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "doubleClick": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "button": {
+            "description": "<string>",
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
+          },
+          "modifiers": {
+            "description": "<string>",
+            "type": "<string>",
+            "items": {
+              "type": "<string>",
+              "enum": [
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>",
+                "<string>"
+              ]
+            }
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "startElement": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "startRef": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "endElement": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "endRef": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>",
+          "<string>",
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "element": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "ref": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "element": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "ref": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "values": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "action": {
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ],
+            "description": "<string>"
+          },
+          "index": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "time": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "text": {
+            "description": "<string>",
+            "type": "<string>"
+          },
+          "textGone": {
+            "description": "<string>",
+            "type": "<string>"
+          }
+        },
+        "$schema": "<string>",
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "libraryName": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "libraryId": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "channel_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "message": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "thread_ts": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "reply_broadcast": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "draft_id": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "channel_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "message": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "post_at": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "thread_ts": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "reply_broadcast": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "message",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "title": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "content": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "content_types": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "context_channel_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "cursor": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "limit": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "after": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "before": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_bots": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "sort": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "sort_dir": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "response_format": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_context": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "max_context_length": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "channel_types": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "content_types": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "context_channel_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "cursor": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "limit": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "after": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "before": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_bots": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "sort": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "sort_dir": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "response_format": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_context": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "max_context_length": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "channel_types": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "cursor": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "limit": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "response_format": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_archived": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "cursor": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "limit": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "response_format": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "channel_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "limit": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "cursor": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "latest": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "oldest": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "response_format": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "channel_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "message_ts": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "limit": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "cursor": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "latest": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "oldest": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "response_format": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "canvas_id": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "user_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_locale": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "response_format": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "channel_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "message": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "thread_ts": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "message"
+        ]
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "minLength": 1,
+            "description": "<string>"
+          },
+          "query_type": {
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "user"
+            ]
+          },
+          "content_search_mode": {
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>"
+            ]
+          },
+          "data_source_url": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "page_url": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "teamspace_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "filters": {
+            "type": "<string>",
+            "properties": {
+              "created_date_range": {
+                "type": "<string>",
+                "properties": {
+                  "start_date": {
+                    "type": "<string>",
+                    "format": "<string>",
+                    "description": "<string>"
+                  },
+                  "end_date": {
+                    "type": "<string>",
+                    "format": "<string>",
+                    "description": "<string>"
+                  }
+                },
+                "additionalProperties": true,
+                "description": "<string>"
+              },
+              "created_by_user_ids": {
+                "type": "<string>",
+                "items": {
+                  "type": "<string>"
+                },
+                "maxItems": 100,
+                "description": "<string>"
+              }
+            },
+            "additionalProperties": true,
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_transcript": {
+            "type": "<string>"
+          },
+          "include_discussions": {
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "pages": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>",
+              "properties": {
+                "properties": {
+                  "type": "<string>",
+                  "additionalProperties": {
+                    "type": [
+                      "<string>",
+                      "<string>",
+                      "<string>"
+                    ]
+                  },
+                  "description": "<string>"
+                },
+                "content": {
+                  "type": "<string>",
+                  "description": "<string>"
+                },
+                "template_id": {
+                  "type": "<string>",
+                  "description": "<string>"
+                }
+              },
+              "additionalProperties": false
+            },
+            "maxItems": 100,
+            "description": "<string>"
+          },
+          "parent": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "properties": {
+                  "page_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": [
+                      "<string>"
+                    ]
+                  }
+                },
+                "required": [
+                  "<string>"
+                ],
+                "additionalProperties": true
+              },
+              {
+                "type": "<string>",
+                "properties": {
+                  "database_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": [
+                      "<string>"
+                    ]
+                  }
+                },
+                "required": [
+                  "<string>"
+                ],
+                "additionalProperties": true
+              },
+              {
+                "type": "<string>",
+                "properties": {
+                  "data_source_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": [
+                      "<string>"
+                    ]
+                  }
+                },
+                "required": [
+                  "<string>"
+                ],
+                "additionalProperties": true
+              }
+            ],
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "page_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "command": {
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>",
+              "<string>"
+            ]
+          },
+          "properties": {
+            "type": "<string>",
+            "additionalProperties": {
+              "type": [
+                "<string>",
+                "<string>",
+                "<string>"
+              ]
+            },
+            "description": "<string>"
+          },
+          "new_str": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "content_updates": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>",
+              "properties": {
+                "old_str": {
+                  "type": "<string>",
+                  "description": "<string>"
+                },
+                "new_str": {
+                  "type": "<string>",
+                  "description": "<string>"
+                },
+                "replace_all_matches": {
+                  "type": "<string>"
+                }
+              },
+              "required": [
+                "<string>",
+                "<string>"
+              ],
+              "additionalProperties": true
+            },
+            "maxItems": 100,
+            "description": "<string>"
+          },
+          "allow_deleting_content": {
+            "type": "<string>"
+          },
+          "template_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "verification_status": {
+            "type": "<string>",
+            "enum": [
+              "<string>",
+              "<string>"
+            ]
+          },
+          "verification_expiry_days": {
+            "type": "<string>",
+            "minimum": 1,
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "page_or_database_ids": {
+            "type": "<string>",
+            "items": {
+              "type": "<string>"
+            },
+            "minItems": 1,
+            "maxItems": 100,
+            "description": "<string>"
+          },
+          "new_parent": {
+            "anyOf": [
+              {
+                "type": "<string>",
+                "properties": {
+                  "page_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": [
+                      "<string>"
+                    ]
+                  }
+                },
+                "required": [
+                  "<string>"
+                ],
+                "additionalProperties": true
+              },
+              {
+                "type": "<string>",
+                "properties": {
+                  "database_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": [
+                      "<string>"
+                    ]
+                  }
+                },
+                "required": [
+                  "<string>"
+                ],
+                "additionalProperties": true
+              },
+              {
+                "type": "<string>",
+                "properties": {
+                  "data_source_id": {
+                    "type": "<string>",
+                    "description": "<string>"
+                  },
+                  "type": {
+                    "type": "<string>",
+                    "enum": [
+                      "<string>"
+                    ]
+                  }
+                },
+                "required": [
+                  "<string>"
+                ],
+                "additionalProperties": true
+              },
+              {
+                "type": "<string>",
+                "properties": {
+                  "type": {
+                    "type": "<string>",
+                    "enum": [
+                      "<string>"
+                    ]
+                  }
+                },
+                "required": [
+                  "<string>"
+                ],
+                "additionalProperties": true
+              }
+            ],
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "page_id": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "schema": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "parent": {
+            "type": "<string>",
+            "properties": {
+              "page_id": {
+                "type": "<string>",
+                "description": "<string>"
+              },
+              "type": {
+                "type": "<string>",
+                "enum": [
+                  "<string>"
+                ]
+              }
+            },
+            "required": [
+              "<string>"
+            ],
+            "additionalProperties": true,
+            "description": "<string>"
+          },
+          "title": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "description": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "data_source_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "statements": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "title": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "description": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "is_inline": {
+            "type": "<string>"
+          },
+          "in_trash": {
+            "type": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "rich_text": {
+            "type": "<string>",
+            "items": {
+              "allOf": [
+                {
+                  "type": "<string>",
+                  "properties": {
+                    "annotations": {
+                      "type": "<string>",
+                      "properties": {
+                        "bold": {
+                          "type": "<string>"
+                        },
+                        "italic": {
+                          "type": "<string>"
+                        },
+                        "strikethrough": {
+                          "type": "<string>"
+                        },
+                        "underline": {
+                          "type": "<string>"
+                        },
+                        "code": {
+                          "type": "<string>"
+                        },
+                        "color": {
+                          "type": "<string>"
+                        }
+                      },
+                      "additionalProperties": true,
+                      "description": "<string>"
+                    }
+                  },
+                  "additionalProperties": true
+                },
+                {
+                  "anyOf": [
+                    {
+                      "type": "<string>",
+                      "properties": {
+                        "type": {
+                          "type": "<string>",
+                          "enum": [
+                            "text"
+                          ]
+                        },
+                        "text": {
+                          "type": "<string>",
+                          "properties": {
+                            "content": {
+                              "type": "<string>",
+                              "maxLength": 2000,
+                              "description": "<string>"
+                            },
+                            "link": {
+                              "anyOf": [
+                                {
+                                  "type": "<string>",
+                                  "properties": {
+                                    "url": {
+                                      "type": "<string>",
+                                      "description": "<string>"
+                                    }
+                                  },
+                                  "required": [
+                                    "<string>"
+                                  ],
+                                  "additionalProperties": true
+                                },
+                                {
+                                  "type": "<string>"
+                                }
+                              ],
+                              "description": "<string>"
+                            }
+                          },
+                          "required": [
+                            "<string>"
+                          ],
+                          "additionalProperties": false,
+                          "description": "<string>"
+                        }
+                      },
+                      "required": [
+                        "text"
+                      ],
+                      "additionalProperties": true
+                    },
+                    {
+                      "type": "<string>",
+                      "properties": {
+                        "type": {
+                          "type": "<string>",
+                          "enum": [
+                            "<string>"
+                          ]
+                        },
+                        "mention": {
+                          "anyOf": [
+                            {
+                              "type": "<string>",
+                              "properties": {
+                                "type": {
+                                  "type": "<string>",
+                                  "enum": [
+                                    "user"
+                                  ]
+                                },
+                                "user": {
+                                  "type": "<string>",
+                                  "properties": {
+                                    "id": {
+                                      "type": "<string>",
+                                      "description": "<string>"
+                                    },
+                                    "object": {
+                                      "type": "<string>",
+                                      "enum": [
+                                        "user"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "<string>"
+                                  ],
+                                  "additionalProperties": true,
+                                  "description": "<string>"
+                                }
+                              },
+                              "required": [
+                                "user"
+                              ],
+                              "additionalProperties": true
+                            },
+                            {
+                              "type": "<string>",
+                              "properties": {
+                                "type": {
+                                  "type": "<string>",
+                                  "enum": [
+                                    "<string>"
+                                  ]
+                                },
+                                "date": {
+                                  "type": "<string>",
+                                  "properties": {
+                                    "start": {
+                                      "type": "<string>",
+                                      "format": "<string>",
+                                      "description": "<string>"
+                                    },
+                                    "end": {
+                                      "anyOf": [
+                                        {
+                                          "type": "<string>",
+                                          "format": "<string>"
+                                        },
+                                        {
+                                          "type": "<string>"
+                                        }
+                                      ],
+                                      "description": "<string>"
+                                    },
+                                    "time_zone": {
+                                      "type": [
+                                        "<string>",
+                                        "<string>"
+                                      ],
+                                      "description": "<string>"
+                                    }
+                                  },
+                                  "required": [
+                                    "<string>"
+                                  ],
+                                  "additionalProperties": false,
+                                  "description": "<string>"
+                                }
+                              },
+                              "required": [
+                                "<string>"
+                              ],
+                              "additionalProperties": true
+                            },
+                            {
+                              "type": "<string>",
+                              "properties": {
+                                "type": {
+                                  "type": "<string>",
+                                  "enum": [
+                                    "<string>"
+                                  ]
+                                },
+                                "page": {
+                                  "type": "<string>",
+                                  "properties": {
+                                    "id": {
+                                      "type": "<string>",
+                                      "description": "<string>"
+                                    }
+                                  },
+                                  "required": [
+                                    "<string>"
+                                  ],
+                                  "additionalProperties": true,
+                                  "description": "<string>"
+                                }
+                              },
+                              "required": [
+                                "<string>"
+                              ],
+                              "additionalProperties": true
+                            },
+                            {
+                              "type": "<string>",
+                              "properties": {
+                                "type": {
+                                  "type": "<string>",
+                                  "enum": [
+                                    "<string>"
+                                  ]
+                                },
+                                "database": {
+                                  "type": "<string>",
+                                  "properties": {
+                                    "id": {
+                                      "type": "<string>",
+                                      "description": "<string>"
+                                    }
+                                  },
+                                  "required": [
+                                    "<string>"
+                                  ],
+                                  "additionalProperties": true,
+                                  "description": "<string>"
+                                }
+                              },
+                              "required": [
+                                "<string>"
+                              ],
+                              "additionalProperties": true
+                            },
+                            {
+                              "type": "<string>",
+                              "properties": {
+                                "type": {
+                                  "type": "<string>",
+                                  "enum": [
+                                    "<string>"
+                                  ]
+                                },
+                                "template_mention": {
+                                  "anyOf": [
+                                    {
+                                      "type": "<string>",
+                                      "properties": {
+                                        "type": {
+                                          "type": "<string>",
+                                          "enum": [
+                                            "<string>"
+                                          ]
+                                        },
+                                        "template_mention_date": {
+                                          "type": "<string>",
+                                          "enum": [
+                                            "<string>",
+                                            "<string>"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "<string>"
+                                      ],
+                                      "additionalProperties": false
+                                    },
+                                    {
+                                      "type": "<string>",
+                                      "properties": {
+                                        "type": {
+                                          "type": "<string>",
+                                          "enum": [
+                                            "<string>"
+                                          ]
+                                        },
+                                        "template_mention_user": {
+                                          "type": "<string>",
+                                          "enum": [
+                                            "<string>"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "<string>"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  ],
+                                  "description": "<string>"
+                                }
+                              },
+                              "required": [
+                                "<string>"
+                              ],
+                              "additionalProperties": true
+                            },
+                            {
+                              "type": "<string>",
+                              "properties": {
+                                "type": {
+                                  "type": "<string>",
+                                  "enum": [
+                                    "<string>"
+                                  ]
+                                },
+                                "custom_emoji": {
+                                  "type": "<string>",
+                                  "properties": {
+                                    "id": {
+                                      "type": "<string>",
+                                      "description": "<string>"
+                                    },
+                                    "name": {
+                                      "type": "<string>",
+                                      "description": "<string>"
+                                    },
+                                    "url": {
+                                      "type": "<string>",
+                                      "description": "<string>"
+                                    }
+                                  },
+                                  "required": [
+                                    "<string>"
+                                  ],
+                                  "additionalProperties": true,
+                                  "description": "<string>"
+                                }
+                              },
+                              "required": [
+                                "<string>"
+                              ],
+                              "additionalProperties": true
+                            }
+                          ],
+                          "description": "<string>"
+                        }
+                      },
+                      "required": [
+                        "<string>"
+                      ],
+                      "additionalProperties": true
+                    },
+                    {
+                      "type": "<string>",
+                      "properties": {
+                        "type": {
+                          "type": "<string>",
+                          "enum": [
+                            "<string>"
+                          ]
+                        },
+                        "equation": {
+                          "type": "<string>",
+                          "properties": {
+                            "expression": {
+                              "type": "<string>",
+                              "description": "<string>"
+                            }
+                          },
+                          "required": [
+                            "<string>"
+                          ],
+                          "additionalProperties": true,
+                          "description": "<string>"
+                        }
+                      },
+                      "required": [
+                        "<string>"
+                      ],
+                      "additionalProperties": true
+                    }
+                  ]
+                }
+              ]
+            },
+            "maxItems": 100,
+            "description": "<string>"
+          },
+          "page_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "discussion_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "selection_with_ellipsis": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>",
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "page_id": {
+            "type": "<string>",
+            "description": "<string>"
+          },
+          "include_resolved": {
+            "type": "<string>"
+          },
+          "include_all_blocks": {
+            "type": "<string>"
+          },
+          "discussion_id": {
+            "type": "<string>",
+            "description": "<string>"
+          }
+        },
+        "required": [
+          "<string>"
+        ],
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "<string>"
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    },
+    {
+      "name": "<string>",
+      "description": "<string>",
+      "input_schema": {
+        "type": "<string>",
+        "properties": {
+          "query": {
+            "type": "<string>",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "<string>"
+          },
+          "start_cursor": {
+            "type": "<string>",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "<string>"
+          },
+          "page_size": {
+            "type": "<string>",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "<string>"
+          },
+          "user_id": {
+            "type": "<string>",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "<string>"
+          }
+        },
+        "additionalProperties": false,
+        "$schema": "<string>"
+      }
+    }
+  ],
+  "metadata": {
+    "user_id": "<string>"
+  },
+  "max_tokens": 32000,
+  "thinking": {
+    "budget_tokens": 31999,
+    "type": "enabled"
+  },
+  "context_management": {
+    "edits": [
+      {
+        "type": "<string>",
+        "keep": "<string>"
+      }
+    ]
+  },
+  "stream": true
+}

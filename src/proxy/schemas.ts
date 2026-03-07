@@ -81,7 +81,7 @@ const SystemBlock = z.object({
 
 const InputSchema = z.object({
   type: z.string(),
-  properties: z.record(z.string(), z.record(z.string(), JsonValueSchema)),
+  properties: z.record(z.string(), z.record(z.string(), JsonValueSchema)).optional(),
   required: z.array(z.string()).optional(),
   additionalProperties: z.boolean().optional(),
   $schema: z.string().optional(),
