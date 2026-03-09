@@ -1,4 +1,4 @@
-import { Check, ChevronDown, ChevronRight, Copy } from "lucide-react";
+import { Check, ChevronDown, ChevronRight, ChevronsDown, ChevronsUp, Copy } from "lucide-react";
 import { type JSX, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { cn } from "../../lib/utils";
@@ -181,6 +181,34 @@ type JsonNodeProps = {
   isArrayItem: boolean;
 };
 
+function hasExpandableDescendant(value: JsonValue): boolean {
+  if (!isExpandable(value)) return false;
+  return getEntries(value).some(([, v]) => isExpandable(v));
+}
+
+function ExpandCollapseButton({
+  allExpanded,
+  onClick,
+}: {
+  allExpanded: boolean;
+  onClick: (e: React.MouseEvent) => void;
+}): JSX.Element {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="opacity-0 group-hover/row:opacity-100 hover:bg-muted p-0.5 rounded transition-opacity shrink-0"
+      title={allExpanded ? "Collapse all" : "Expand all"}
+    >
+      {allExpanded ? (
+        <ChevronsUp className="size-3.5 text-muted-foreground" />
+      ) : (
+        <ChevronsDown className="size-3.5 text-muted-foreground" />
+      )}
+    </button>
+  );
+}
+
 function JsonNode({
   name,
   value,
@@ -189,11 +217,31 @@ function JsonNode({
   isArrayItem,
 }: JsonNodeProps): JSX.Element {
   const [expanded, setExpanded] = useState(level < defaultExpandDepth);
+  const [childResetKey, setChildResetKey] = useState(0);
+  const [childDepthOverride, setChildDepthOverride] = useState<number | null>(null);
+  const [allExpanded, setAllExpanded] = useState(false);
   const expandable = isExpandable(value);
 
   const dataType = classifyValue(value);
   const openBracket = dataType === "array" ? "[" : "{";
   const closeBracket = dataType === "array" ? "]" : "}";
+
+  function handleExpandAll(e: React.MouseEvent): void {
+    e.stopPropagation();
+    if (allExpanded) {
+      setExpanded(false);
+      setChildDepthOverride(0);
+      setChildResetKey((k) => k + 1);
+      setAllExpanded(false);
+    } else {
+      setExpanded(true);
+      setChildDepthOverride(Number.POSITIVE_INFINITY);
+      setChildResetKey((k) => k + 1);
+      setAllExpanded(true);
+    }
+  }
+
+  const effectiveChildDepth = childDepthOverride ?? defaultExpandDepth;
 
   return (
     <div className={cn(level > 0 && "border-l border-border/50 ml-2")}>
@@ -205,6 +253,9 @@ function JsonNode({
         onClick={
           expandable
             ? () => {
+                if (expanded) {
+                  setAllExpanded(false);
+                }
                 setExpanded(!expanded);
               }
             : undefined
@@ -243,12 +294,10 @@ function JsonNode({
         {expandable ? (
           <span className="text-muted-foreground">
             {openBracket}
-            {!expanded && (
-              <span className="text-muted-foreground/60 text-xs">
-                {" "}
-                {getItemCount(value)} {getItemCount(value) === 1 ? "item" : "items"} {closeBracket}
-              </span>
-            )}
+            <span className="text-muted-foreground/60 text-xs">
+              {" "}
+              {getItemCount(value)} {getItemCount(value) === 1 ? "item" : "items"} {closeBracket}
+            </span>
           </span>
         ) : (
           <span className="min-w-0">
@@ -256,20 +305,21 @@ function JsonNode({
           </span>
         )}
 
-        <span className="ml-auto shrink-0 flex items-center">
-          <CopyButton value={value} />
-        </span>
+        {expandable && hasExpandableDescendant(value) && (
+          <ExpandCollapseButton allExpanded={allExpanded} onClick={handleExpandAll} />
+        )}
+        <CopyButton value={value} />
       </div>
 
       {expandable && expanded && (
-        <div className="pl-4">
+        <div className="pl-4" key={childResetKey}>
           {getEntries(value).map(([key, childValue]) => (
             <JsonNode
               key={key}
               name={key}
               value={childValue}
               level={level + 1}
-              defaultExpandDepth={defaultExpandDepth}
+              defaultExpandDepth={effectiveChildDepth}
               isArrayItem={dataType === "array"}
             />
           ))}
