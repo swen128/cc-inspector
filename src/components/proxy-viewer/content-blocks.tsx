@@ -139,7 +139,7 @@ function ToolResultInlineContent({
         | {
             type: "text";
             text: string;
-            cache_control?: { type: string; ttl: string; scope?: string };
+            cache_control?: { type: string; ttl?: string; scope?: string };
           }
         | { type: "image"; source: { type: "base64"; media_type: string; data: string } }
       >;
@@ -181,7 +181,7 @@ export function ToolResultBlock({
         | {
             type: "text";
             text: string;
-            cache_control?: { type: string; ttl: string; scope?: string };
+            cache_control?: { type: string; ttl?: string; scope?: string };
           }
         | { type: "image"; source: { type: "base64"; media_type: string; data: string } }
       >;

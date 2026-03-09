@@ -15,7 +15,7 @@ const JsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
 
 const CacheControl = z.object({
   type: z.string(),
-  ttl: z.string(),
+  ttl: z.string().optional(),
   scope: z.string().optional(),
 });
 

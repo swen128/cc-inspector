@@ -1,0 +1,32 @@
+{
+  "model": "<string>",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "<string>"
+        },
+        {
+          "type": "text",
+          "text": "<string>",
+          "cache_control": {
+            "type": "<string>"
+          }
+        }
+      ]
+    }
+  ],
+  "system": [
+    {
+      "type": "text",
+      "text": "<string>",
+      "cache_control": {
+        "type": "<string>"
+      }
+    }
+  ],
+  "max_tokens": 1024,
+  "stream": true
+}
