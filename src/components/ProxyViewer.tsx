@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import { type JSX, useCallback, useState } from "react";
 import type { CapturedLog } from "../proxy/schemas";
 import { LogEntry } from "./proxy-viewer/LogEntry";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
@@ -16,6 +16,58 @@ function computeTokenSummary(logs: CapturedLog[]): { totalIn: number; totalOut: 
     if (log.outputTokens !== null) totalOut += log.outputTokens;
   }
   return { totalIn, totalOut };
+}
+
+function CopyableCommand({ command }: { command: string }): JSX.Element {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback(() => {
+    void window.navigator.clipboard.writeText(command).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [command]);
+
+  return (
+    <div className="inline-flex items-center gap-2 bg-muted rounded-md px-3 py-2">
+      <pre className="text-blue-500 font-mono text-sm m-0">{command}</pre>
+      <button
+        type="button"
+        onClick={handleCopy}
+        className="text-muted-foreground hover:text-foreground transition-colors shrink-0 cursor-pointer"
+        aria-label="Copy command"
+      >
+        {copied ? (
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        ) : (
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+          </svg>
+        )}
+      </button>
+    </div>
+  );
 }
 
 export type ProxyViewerProps = {
@@ -89,9 +141,7 @@ export function ProxyViewer({
           <div className="text-center text-muted-foreground py-16 space-y-4">
             <p className="text-sm">No requests captured yet.</p>
             <p className="text-xs">Configure Claude Code with:</p>
-            <pre className="text-blue-500 font-mono text-sm">
-              ANTHROPIC_BASE_URL=http://localhost:25947/proxy claude
-            </pre>
+            <CopyableCommand command="ANTHROPIC_BASE_URL=http://localhost:25947/proxy claude" />
           </div>
         ) : (
           logs.map((log) => <LogEntry key={log.id} log={log} />)
