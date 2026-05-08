@@ -155,26 +155,6 @@ export function ResponseView({
     );
   }
 
-  if (streaming) {
-    return (
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <StatusIndicator status={responseStatus} />
-          {(inputTokens !== null || outputTokens !== null) && (
-            <span className="flex items-center gap-1 text-muted-foreground text-xs">
-              <Zap className="size-3" />
-              <span className="font-mono tabular-nums">
-                {inputTokens !== null ? formatTokens(inputTokens) : "—"} in /{" "}
-                {outputTokens !== null ? formatTokens(outputTokens) : "—"} out
-              </span>
-            </span>
-          )}
-        </div>
-        <MarkdownFallbackView text={responseText} />
-      </div>
-    );
-  }
-
   const parsed = parseResponse(responseText);
 
   if (parsed !== null) {
@@ -188,7 +168,18 @@ export function ResponseView({
 
   return (
     <div className="space-y-2">
-      <StatusIndicator status={responseStatus} />
+      <div className="flex items-center gap-2">
+        <StatusIndicator status={responseStatus} />
+        {streaming && (inputTokens !== null || outputTokens !== null) && (
+          <span className="flex items-center gap-1 text-muted-foreground text-xs">
+            <Zap className="size-3" />
+            <span className="font-mono tabular-nums">
+              {inputTokens !== null ? formatTokens(inputTokens) : "—"} in /{" "}
+              {outputTokens !== null ? formatTokens(outputTokens) : "—"} out
+            </span>
+          </span>
+        )}
+      </div>
       <MarkdownFallbackView text={responseText} />
     </div>
   );
