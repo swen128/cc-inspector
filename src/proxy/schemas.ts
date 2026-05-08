@@ -234,8 +234,4 @@ export function parseRequest(rawBody: string | null): ClaudeRequest | null {
 export type ClaudeRequest = z.infer<typeof ClaudeRequestSchema>;
 export type ClaudeResponse = z.infer<typeof ClaudeResponseSchema>;
 export type CapturedLog = z.infer<typeof CapturedLogSchema>;
-export type ContentBlockType = z.infer<typeof ContentBlock>;
 export type ResponseContentBlockType = z.infer<typeof ResponseContentBlock>;
-export type MessageType = z.infer<typeof Message>;
-export type SystemBlockType = z.infer<typeof SystemBlock>;
-export type ToolDefinitionType = z.infer<typeof ToolDefinition>;

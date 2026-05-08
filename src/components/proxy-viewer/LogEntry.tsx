@@ -5,7 +5,6 @@ import { type CapturedLog, parseRequest } from "../../proxy/schemas";
 import { JsonViewerFromString } from "../ui/json-viewer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { LogEntryHeader } from "./LogEntryHeader";
-import { RequestView } from "./RequestView";
 import { ResponseView } from "./ResponseView";
 
 export type LogEntryProps = {
@@ -40,17 +39,14 @@ export function LogEntry({ log }: LogEntryProps): JSX.Element {
             <TabsList className="mx-4 mt-2">
               <TabsTrigger value="request">Request</TabsTrigger>
               <TabsTrigger value="response">Response</TabsTrigger>
-              <TabsTrigger value="raw">Raw</TabsTrigger>
             </TabsList>
 
             <TabsContent value="request">
               <div className="px-4 py-3">
-                {parsedRequest !== null ? (
-                  <RequestView request={parsedRequest} />
+                {log.rawRequestBody !== null ? (
+                  <JsonViewerFromString text={log.rawRequestBody} defaultExpandDepth={1} />
                 ) : (
-                  <pre className="font-mono text-xs whitespace-pre-wrap break-words">
-                    {log.rawRequestBody ?? "No request body captured"}
-                  </pre>
+                  <p className="text-xs text-muted-foreground italic">No request body</p>
                 )}
               </div>
             </TabsContent>
@@ -64,27 +60,6 @@ export function LogEntry({ log }: LogEntryProps): JSX.Element {
                   inputTokens={log.inputTokens}
                   outputTokens={log.outputTokens}
                 />
-              </div>
-            </TabsContent>
-
-            <TabsContent value="raw">
-              <div className="px-4 py-3 space-y-4">
-                <div>
-                  <h4 className="text-xs font-medium text-muted-foreground mb-1.5">Request</h4>
-                  {log.rawRequestBody !== null ? (
-                    <JsonViewerFromString text={log.rawRequestBody} defaultExpandDepth={1} />
-                  ) : (
-                    <p className="text-xs text-muted-foreground italic">No request body</p>
-                  )}
-                </div>
-                <div>
-                  <h4 className="text-xs font-medium text-muted-foreground mb-1.5">Response</h4>
-                  {log.responseText !== null ? (
-                    <JsonViewerFromString text={log.responseText} defaultExpandDepth={1} />
-                  ) : (
-                    <p className="text-xs text-muted-foreground italic">No response body</p>
-                  )}
-                </div>
               </div>
             </TabsContent>
           </Tabs>
